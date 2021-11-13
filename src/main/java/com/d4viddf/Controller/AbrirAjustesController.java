@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class AbrirAjustesController implements Initializable {
     private static FileWriter file;
-
+Errores errores = new Errores();
     @FXML
     private TextField idUser;
     @FXML
@@ -45,22 +45,7 @@ public class AbrirAjustesController implements Initializable {
             file.flush();
             file.close();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-                ErrorController cf = new ErrorController();
-                cf.setError(Errores.muestraErrorIO(e));
-                fx.setController(cf);
-                Parent froot;
-                try {
-                    froot = fx.load();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(froot));
-                    stage.setTitle("Error");
-                    stage.setResizable(false);
-                    stage.show();
-                } catch (IOException ei) {
-                    ei.printStackTrace();
-                }
+            errores.muestraErrorIO(e);
         }
     }
 

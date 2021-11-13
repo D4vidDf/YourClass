@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 public class Crear {
     public static void createTables(Connection con) {
+        Errores errores = new Errores();
         try {
             Statement st = con.createStatement();
             // process the ResultSet object
@@ -37,7 +38,7 @@ public class Crear {
             st.executeUpdate("ALTER TABLE    Imparten ADD    CONSTRAINT imparten_asignatura_foreign FOREIGN KEY(asignatura) REFERENCES Asignaturas(id);");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            errores.muestraErrorSQL(e);
         }
     }
 }

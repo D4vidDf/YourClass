@@ -78,8 +78,8 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <DatePicker fx:id="fecha" layoutX="330.0" layoutY="255.0" prefHeight="36.0" prefWidth="230.0" promptText="Fecha Nacimiento" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #000000;" />
-                        <TextField fx:id="txtNum" layoutX="330.0" layoutY="51.0" prefHeight="36.0" prefWidth="235.0" promptText="Número Expediente" style="-fx-background-radius: 10;" />
-                        <Button layoutX="459.0" layoutY="321.0" mnemonicParsing="false" onAction="#crear" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Crear" textFill="WHITE">
+                        <TextField fx:id="txtNum" layoutX="330.0" layoutY="51.0" prefHeight="36.0" prefWidth="235.0" promptText="Número Expediente" style="-fx-background-radius: 10;" text="1" />
+                        <Button layoutX="459.0" layoutY="321.0" mnemonicParsing="false" onAction="#crearalumno" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Crear" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
@@ -109,9 +109,9 @@
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtDNI" layoutX="330.0" layoutY="103.0" prefHeight="36.0" prefWidth="235.0" promptText="DNI" style="-fx-background-radius: 10;" />
-                        <TextField fx:id="txtNombre" layoutX="330.0" layoutY="156.0" prefHeight="36.0" prefWidth="235.0" promptText="Nombre" style="-fx-background-radius: 10;" />
-                        <TextField fx:id="txtApellidos" layoutX="330.0" layoutY="204.0" prefHeight="36.0" prefWidth="235.0" promptText="Apellidos" style="-fx-background-radius: 10;" />
+                        <TextField fx:id="txtDNI" layoutX="330.0" layoutY="103.0" prefHeight="36.0" prefWidth="235.0" promptText="DNI" style="-fx-background-radius: 10;" text="12456734t" />
+                        <TextField fx:id="txtNombre" layoutX="330.0" layoutY="156.0" prefHeight="36.0" prefWidth="235.0" promptText="Nombre" style="-fx-background-radius: 10;" text="david" />
+                        <TextField fx:id="txtApellidos" layoutX="330.0" layoutY="204.0" prefHeight="36.0" prefWidth="235.0" promptText="Apellidos" style="-fx-background-radius: 10;" text="dom" />
                      </children>
                   </AnchorPane>
             </content>

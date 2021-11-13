@@ -14,7 +14,6 @@ public class ImpartenDAO implements Dao<Imparten> {
 
     @Override
     public Imparten get(long id) {
-        // TODO Auto-generated method stub
         return null;
     }
 

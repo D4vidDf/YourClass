@@ -20,7 +20,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
-
+Errores errores = new Errores();
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -47,22 +47,7 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-            ErrorController cf = new ErrorController();
-            cf.setError(Errores.muestraErrorIO(e));
-            loader.setController(cf);
-            Parent froot;
-            try {
-                froot = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(froot));
-                stage.setTitle("Error");
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException ei) {
-                ei.printStackTrace();
-            }
+            errores.muestraErrorIO(e);
         }
 
     }
@@ -79,39 +64,9 @@ public class MainController implements Initializable {
             try {
                 Desktop.getDesktop().browse(new URI("https://github.com/D4vidDf/sql_ejer17/wiki"));
             } catch (IOException e1) {
-                FXMLLoader fx = new FXMLLoader();
-                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-                ErrorController cf = new ErrorController();
-                cf.setError(Errores.muestraErrorIO(e1));
-                fx.setController(cf);
-                Parent froot;
-                try {
-                    froot = fx.load();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(froot));
-                    stage.setTitle("Alumnos");
-                    stage.setResizable(false);
-                    stage.show();
-                } catch (IOException ei) {
-                    ei.printStackTrace();
-                }
+                errores.muestraErrorIO(e1);
             } catch (URISyntaxException e1) {
-                FXMLLoader fx = new FXMLLoader();
-                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-                ErrorController cf = new ErrorController();
-                cf.setError(Errores.muestraErrorURY(e1));
-                fx.setController(cf);
-                Parent froot;
-                try {
-                    froot = fx.load();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(froot));
-                    stage.setTitle("Error");
-                    stage.setResizable(false);
-                    stage.show();
-                } catch (IOException ei) {
-                    ei.printStackTrace();
-                }
+                errores.muestraErrorURY(e1);
             }
         }
     }
@@ -138,22 +93,7 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-            ErrorController cf = new ErrorController();
-            cf.setError(Errores.muestraErrorIO(e));
-            fx.setController(cf);
-            Parent froot;
-            try {
-                froot = fx.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(froot));
-                stage.setTitle("Error");
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException ei) {
-                ei.printStackTrace();
-            }
+            errores.muestraErrorIO(e);
         }
 
     }
@@ -168,7 +108,7 @@ public class MainController implements Initializable {
     private void abrirAlumno(ActionEvent ae) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
-        ModificadorController c = new ModificadorController();
+        AlumnosController c = new AlumnosController();
         loader.setController(c);
         Parent root;
         try {
@@ -179,22 +119,7 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-                ErrorController cf = new ErrorController();
-                cf.setError(Errores.muestraErrorIO(e));
-                fx.setController(cf);
-                Parent froot;
-                try {
-                    froot = fx.load();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(froot));
-                    stage.setTitle("Error");
-                    stage.setResizable(false);
-                    stage.show();
-                } catch (IOException ei) {
-                    ei.printStackTrace();
-                }
+            errores.muestraErrorIO(e);
         }
     }
 
@@ -220,22 +145,7 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-            ErrorController cf = new ErrorController();
-            c.setError(Errores.muestraErrorIO(e));
-            fx.setController(cf);
-            Parent froot;
-            try {
-                froot = fx.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(froot));
-                stage.setTitle("Error");
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException ei) {
-                ei.printStackTrace();
-            }
+            errores.muestraErrorIO(e);
         }
     }
 
@@ -260,22 +170,7 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-            ErrorController cf = new ErrorController();
-            cf.setError(Errores.muestraErrorIO(e));
-            fx.setController(cf);
-            Parent froot;
-            try {
-                froot = fx.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(froot));
-                stage.setTitle("Error");
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException ei) {
-                ei.printStackTrace();
-            }
+            errores.muestraErrorIO(e);
         }
     }
 
@@ -300,22 +195,7 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-            ErrorController cf = new ErrorController();
-            cf.setError(Errores.muestraErrorIO(e));
-            fx.setController(cf);
-            Parent froot;
-            try {
-                froot = fx.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(froot));
-                stage.setTitle("Error");
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException ei) {
-                ei.printStackTrace();
-            }
+            errores.muestraErrorIO(e);
         }
     }
 
@@ -340,22 +220,7 @@ public class MainController implements Initializable {
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
-            FXMLLoader fx = new FXMLLoader();
-            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-            ErrorController cf = new ErrorController();
-            cf.setError(Errores.muestraErrorIO(e));
-            fx.setController(cf);
-            Parent froot;
-            try {
-                froot = fx.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(froot));
-                stage.setTitle("Error");
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException ei) {
-                ei.printStackTrace();
-            }
+            errores.muestraErrorIO(e);
         }
     }
 }

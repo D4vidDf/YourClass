@@ -6,32 +6,120 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.time.DateTimeException;
 
+import com.d4viddf.Controller.ErrorController;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 public class Errores {
-    public static String muestraErrorSQL(SQLException e) {
-        System.err.println("SQL ERROR mensaje: " + e.getMessage());
-        System.err.println("SQL Estado: " + e.getSQLState());
-        System.err.println("SQL código específico: " + e.getErrorCode());
-        String outString = new String("SQL ERROR mensaje: " + e.getMessage()+"\nSQL Estado: " + e.getSQLState()+"\nSQL código específico: " + e.getErrorCode());
-        return outString;
+    public void muestraErrorSQL(SQLException e) {
+        String outString = new String("SQL ERROR mensaje: " + e.getMessage() + "\nSQL Estado: " + e.getSQLState()
+                + "\nSQL código específico: " + e.getErrorCode());
+        FXMLLoader fx = new FXMLLoader();
+        fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+        ErrorController cf = new ErrorController();
+        cf.setError(outString);
+        fx.setController(cf);
+        Parent froot;
+        try {
+            froot = fx.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(froot));
+            stage.setTitle("Error");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ei) {
+            ei.printStackTrace();
+        }
     }
-    public static String muestraErrorIO(IOException e) {
+
+    public void muestraErrorIO(IOException e) {
         e.printStackTrace();
-        String outString = new String("ERROR mensaje: " + e.getMessage()+"\nCausa: " + e.getCause()+"\nClase: " + e.getClass());
-        return outString;
+        String outString = new String(
+                "ERROR mensaje: " + e.getMessage() + "\nCausa: " + e.getCause() + "\nClase: " + e.getClass());
+        FXMLLoader fx = new FXMLLoader();
+        fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+        ErrorController cf = new ErrorController();
+        cf.setError(outString);
+        fx.setController(cf);
+        Parent froot;
+        try {
+            froot = fx.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(froot));
+            stage.setTitle("Error");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ei) {
+            ei.printStackTrace();
+        }
     }
-    public static String muestraError(Exception e) {
+
+    public void muestraError(Exception e) {
         e.printStackTrace();
-        String outString = new String("ERROR mensaje: " + e.getMessage()+"\nCausa: " + e.getCause()+"\nClase: " + e.getClass());
-        return outString;
+        String outString = new String(
+                "ERROR mensaje: " + e.getMessage() + "\nCausa: " + e.getCause() + "\nClase: " + e.getClass());
+        FXMLLoader fx = new FXMLLoader();
+        fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+        ErrorController cf = new ErrorController();
+        cf.setError(outString);
+        fx.setController(cf);
+        Parent froot;
+        try {
+            froot = fx.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(froot));
+            stage.setTitle("Error");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ei) {
+            ei.printStackTrace();
+        }
     }
-    public static String muestraErrorURY(URISyntaxException e) {
+
+    public void muestraErrorURY(URISyntaxException e) {
         e.printStackTrace();
-        String outString = new String("ERROR mensaje: " + e.getMessage()+"\nCausa: " + e.getCause()+"\nClase: " + e.getClass());
-        return outString;
+        String outString = new String(
+                "ERROR mensaje: " + e.getMessage() + "\nCausa: " + e.getCause() + "\nClase: " + e.getClass());
+        FXMLLoader fx = new FXMLLoader();
+        fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+        ErrorController cf = new ErrorController();
+        cf.setError(outString);
+        fx.setController(cf);
+        Parent froot;
+        try {
+            froot = fx.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(froot));
+            stage.setTitle("Error");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ei) {
+            ei.printStackTrace();
+        }
     }
-    public static String muestraErrorDate(DateTimeException e) {
+
+    public void muestraErrorDate(DateTimeException e) {
         e.printStackTrace();
-        String outString = new String("ERROR mensaje: " + e.getMessage()+"\nCausa: " + e.getCause()+"\nClase: " + e.getClass());
-        return outString;
+        String outString = new String(
+                "ERROR mensaje: " + e.getMessage() + "\nCausa: " + e.getCause() + "\nClase: " + e.getClass());
+        FXMLLoader fx = new FXMLLoader();
+        fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+        ErrorController cf = new ErrorController();
+        cf.setError(outString);
+        fx.setController(cf);
+        Parent froot;
+        try {
+            froot = fx.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(froot));
+            stage.setTitle("Error");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ei) {
+            ei.printStackTrace();
+        }
     }
 }

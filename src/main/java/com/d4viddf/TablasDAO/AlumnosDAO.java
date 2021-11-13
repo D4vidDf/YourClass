@@ -22,7 +22,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AlumnosDAO implements Dao<Alumnos> {
-
+    Errores errores = new Errores();
     static Scanner teclado = new Scanner(System.in);
 
     @Override
@@ -45,7 +45,7 @@ public class AlumnosDAO implements Dao<Alumnos> {
                 lista.add(emp);
             }
         } catch (SQLException e) {
-
+            errores.muestraErrorSQL(e);
         }
         return lista;
     }
@@ -77,11 +77,11 @@ public class AlumnosDAO implements Dao<Alumnos> {
             }
             ps.executeBatch();
         } catch (DateTimeException e) {
-
+            errores.muestraErrorDate(e);
         }
 
         catch (SQLException e) {
-
+            errores.muestraErrorSQL(e);
         }
 
     }
@@ -97,22 +97,7 @@ public class AlumnosDAO implements Dao<Alumnos> {
             ps.setDate(5, Date.valueOf(fecha));
             ps.execute();
         } catch (SQLException e) {
-            FXMLLoader fx = new FXMLLoader();
-                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-                ErrorController cf = new ErrorController();
-                cf.setError(Errores.muestraErrorSQL(e));
-                fx.setController(cf);
-                Parent froot;
-                try {
-                    froot = fx.load();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(froot));
-                    stage.setTitle("Error");
-                    stage.setResizable(false);
-                    stage.show();
-                } catch (IOException ei) {
-                    ei.printStackTrace();
-                }
+            errores.muestraErrorSQL(e);
         }
     }
 

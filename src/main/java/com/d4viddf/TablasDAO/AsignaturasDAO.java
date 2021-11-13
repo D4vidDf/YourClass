@@ -18,7 +18,6 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
 
     @Override
     public Asignaturas get(long id) {
-        // TODO Auto-generated method stub
         return null;
     }
 

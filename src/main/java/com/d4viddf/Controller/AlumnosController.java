@@ -2,6 +2,7 @@ package com.d4viddf.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -27,7 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class AlumnosController extends DBViewController implements Initializable {
-
+Errores errores = new Errores();
     @FXML
     private TableView<Alumnos> tabAlumnos;
     @FXML
@@ -64,7 +65,7 @@ public class AlumnosController extends DBViewController implements Initializable
         colDNI.setCellValueFactory(new PropertyValueFactory<Alumnos, String>("dni"));
         colNombre.setCellValueFactory(new PropertyValueFactory<Alumnos, String>("nombre"));
         colApellidos.setCellValueFactory(new PropertyValueFactory<Alumnos, String>("apellidos"));
-        colNac.setCellValueFactory(new PropertyValueFactory<Alumnos, Date>("fecha"));
+        colNac.setCellValueFactory(new PropertyValueFactory<Alumnos, Date>("nacimiento"));
 
         cbxBuscarPor.getItems().setAll("Número de expediente", "DNI", "Nombre", "Apellidos", "Año de nacimiento",
                 "DNI de profesor");
@@ -118,29 +119,14 @@ public class AlumnosController extends DBViewController implements Initializable
     }
 
     @FXML
-    private void crear(ActionEvent ae) {
+    private void crearalumno(ActionEvent ae) {
         try {
             AlumnosDAO alm = new AlumnosDAO();
             alm.insertar(mySQLDAOFactory.getConnection(), txtNombre.getText().toString(),
                     txtApellidos.getText().toString(), txtDNI.getText().toString(),
                     Integer.parseInt(txtNum.getText().toString()), fecha.getValue());
         } catch (Exception e) {
-            FXMLLoader fx = new FXMLLoader();
-            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
-            ErrorController cf = new ErrorController();
-            cf.setError(Errores.muestraError(e));
-            fx.setController(cf);
-            Parent froot;
-            try {
-                froot = fx.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(froot));
-                stage.setTitle("Error");
-                stage.setResizable(false);
-                stage.show();
-            } catch (IOException ei) {
-                ei.printStackTrace();
-            }
+            errores.muestraError(e);
         }
     }
 

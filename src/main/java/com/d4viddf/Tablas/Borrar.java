@@ -18,7 +18,7 @@ public class Borrar {
             st.executeUpdate("delete from Profesores");
 
         } catch (SQLException e) {
-            Errores.muestraErrorSQL(e);
+            e.printStackTrace();
         }
     }
 }
