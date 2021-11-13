@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "com.d4viddf.Main",
+            "vmArgs": "--module-path /Users/daviddominguezfondo/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "projectName": "sql_connection"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "com.d4viddf.App",
+            "vmArgs": "--module-path /Users/daviddominguezfondo/javafx-sdk-17.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "projectName": "sql_connection"
+        }
+    ]
+}

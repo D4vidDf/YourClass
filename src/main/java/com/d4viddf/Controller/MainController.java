@@ -1,0 +1,361 @@
+package com.d4viddf.Controller;
+
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javax.swing.Action;
+
+import com.d4viddf.Error.Errores;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class MainController implements Initializable {
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+
+    }
+
+    /**
+     * Gestiona el evento del botón ajustes. Al pulsar el botón se abre la ventana
+     * para realizar la modificación pertinentes al archivo settings.json
+     * 
+     * @param ae
+     */
+    @FXML
+    private void abrirSettings(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/settings.fxml"));
+        AbrirAjustesController c = new AbrirAjustesController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Ajustes");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            FXMLLoader fx = new FXMLLoader();
+            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+            ErrorController cf = new ErrorController();
+            cf.setError(Errores.muestraErrorIO(e));
+            loader.setController(cf);
+            Parent froot;
+            try {
+                froot = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(froot));
+                stage.setTitle("Error");
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ei) {
+                ei.printStackTrace();
+            }
+        }
+
+    }
+
+    /**
+     * Gestiona el evento del enlace. Al pulsar el enlace de ayuda se abre el
+     * navegador por defecto del usuario para ver la socumentación del programa
+     * 
+     * @param ae
+     */
+    @FXML
+    private void url(ActionEvent ae) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/D4vidDf/sql_ejer17/wiki"));
+            } catch (IOException e1) {
+                FXMLLoader fx = new FXMLLoader();
+                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+                ErrorController cf = new ErrorController();
+                cf.setError(Errores.muestraErrorIO(e1));
+                fx.setController(cf);
+                Parent froot;
+                try {
+                    froot = fx.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(froot));
+                    stage.setTitle("Alumnos");
+                    stage.setResizable(false);
+                    stage.show();
+                } catch (IOException ei) {
+                    ei.printStackTrace();
+                }
+            } catch (URISyntaxException e1) {
+                FXMLLoader fx = new FXMLLoader();
+                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+                ErrorController cf = new ErrorController();
+                cf.setError(Errores.muestraErrorURY(e1));
+                fx.setController(cf);
+                Parent froot;
+                try {
+                    froot = fx.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(froot));
+                    stage.setTitle("Error");
+                    stage.setResizable(false);
+                    stage.show();
+                } catch (IOException ei) {
+                    ei.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * Gestiona el evento del botón modificar la base de datos. Al pulsar el botón
+     * se abre la ventana para realizar las modificaciones pertinentes a la base de
+     * datos
+     * 
+     * @param ae
+     */
+    @FXML
+    private void abrirModificador(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/alterDataBase.fxml"));
+        ModificadorController c = new ModificadorController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Modificación de la base de datos");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            FXMLLoader fx = new FXMLLoader();
+            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+            ErrorController cf = new ErrorController();
+            cf.setError(Errores.muestraErrorIO(e));
+            fx.setController(cf);
+            Parent froot;
+            try {
+                froot = fx.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(froot));
+                stage.setTitle("Error");
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ei) {
+                ei.printStackTrace();
+            }
+        }
+
+    }
+
+    /**
+     * Método que gestiona el evento del botón Alumno que muestra la ventana para
+     * poder interaccionar con la tabla Alumnos.
+     * 
+     * @param ae
+     */
+    @FXML
+    private void abrirAlumno(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
+        ModificadorController c = new ModificadorController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Alumnos");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            FXMLLoader fx = new FXMLLoader();
+                fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+                ErrorController cf = new ErrorController();
+                cf.setError(Errores.muestraErrorIO(e));
+                fx.setController(cf);
+                Parent froot;
+                try {
+                    froot = fx.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(froot));
+                    stage.setTitle("Error");
+                    stage.setResizable(false);
+                    stage.show();
+                } catch (IOException ei) {
+                    ei.printStackTrace();
+                }
+        }
+    }
+
+    /**
+     * Método que gestiona el evento del botón Profesor que abre una ventana para
+     * poder interactuar con la tabla Profesor.
+     * 
+     * @param ae
+     */
+    @FXML
+    private void abrirProfesor(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/error.fxml"));
+        ErrorController c = new ErrorController();
+        c.setError("error");
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Alumnos");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            FXMLLoader fx = new FXMLLoader();
+            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+            ErrorController cf = new ErrorController();
+            c.setError(Errores.muestraErrorIO(e));
+            fx.setController(cf);
+            Parent froot;
+            try {
+                froot = fx.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(froot));
+                stage.setTitle("Error");
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ei) {
+                ei.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Método que gestiona el evento del botón Asignatura que abre una ventana para
+     * poder interactuar con la tabla Asignaturas.
+     * 
+     * @param ae
+     */
+    @FXML
+    private void abrirAsignatura(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
+        AlumnosController c = new AlumnosController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Alumnos");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            FXMLLoader fx = new FXMLLoader();
+            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+            ErrorController cf = new ErrorController();
+            cf.setError(Errores.muestraErrorIO(e));
+            fx.setController(cf);
+            Parent froot;
+            try {
+                froot = fx.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(froot));
+                stage.setTitle("Error");
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ei) {
+                ei.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Método que gestiona el evento del botón Departamento que abre una ventana
+     * para poder interatuar con la tabla Departamentos.
+     * 
+     * @param ae
+     */
+    @FXML
+    private void abrirDepartamento(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
+        AlumnosController c = new AlumnosController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Alumnos");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            FXMLLoader fx = new FXMLLoader();
+            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+            ErrorController cf = new ErrorController();
+            cf.setError(Errores.muestraErrorIO(e));
+            fx.setController(cf);
+            Parent froot;
+            try {
+                froot = fx.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(froot));
+                stage.setTitle("Error");
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ei) {
+                ei.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Método que gestiona el evento del botón Imparten que abre una ventana para
+     * interactuar con la tabla Imparten
+     * 
+     * @param ae
+     */
+    @FXML
+    private void abrirImparten(ActionEvent ae) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
+        AlumnosController c = new AlumnosController();
+        loader.setController(c);
+        Parent root;
+        try {
+            root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Alumnos");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            FXMLLoader fx = new FXMLLoader();
+            fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+            ErrorController cf = new ErrorController();
+            cf.setError(Errores.muestraErrorIO(e));
+            fx.setController(cf);
+            Parent froot;
+            try {
+                froot = fx.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(froot));
+                stage.setTitle("Error");
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ei) {
+                ei.printStackTrace();
+            }
+        }
+    }
+}
