@@ -15,7 +15,7 @@ import com.d4viddf.Tablas.Departamentos;
 public class DepartamentosDAO implements Dao<Departamentos> {
     static Scanner teclado = new Scanner(System.in);
     @Override
-    public Departamentos get(long id) {
+    public Departamentos get(Connection con, int id) {
         return null;
     }
 

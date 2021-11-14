@@ -20,8 +20,7 @@ public class ProfesoresDAO implements Dao<Profesores> {
     static Scanner teclado = new Scanner(System.in);
 
     @Override
-    public Profesores get(long id) {
-        // TODO Auto-generated method stub
+    public Profesores get(Connection con, int id) {
         return null;
     }
 

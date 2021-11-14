@@ -4,11 +4,11 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 public class Alumnos {
-    public int expediente;
-    public String DNI;
-    public String nombre;
-    public String apellidos;
-    public LocalDate nacimiento;
+    private int expediente;
+    private String DNI;
+    private String nombre;
+    private String apellidos;
+    private LocalDate nacimiento;
 
     public Alumnos() {
     }

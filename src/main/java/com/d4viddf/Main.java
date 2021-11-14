@@ -25,6 +25,7 @@ public class Main extends Application{
         primaryStage.setTitle("YourClass");
         primaryStage.getIcons().add(new Image("/drawable/blackboard.png"));
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

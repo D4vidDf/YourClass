@@ -188,7 +188,7 @@ public class App {
 
     public static void insertarAlumno() {
         try {
-            almDAO.insertarLote(mySQLFactory.getConnection());
+            //almDAO.insertarLote(mySQLFactory.getConnection());
         } catch (Exception e) {
             e.printStackTrace();
         }

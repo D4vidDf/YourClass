@@ -51,7 +51,7 @@
             </Label>
             <TextArea id="msg" fx:id="msg" blendMode="SRC_ATOP" editable="false" layoutX="155.0" layoutY="66.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="133.0" prefWidth="450.0" style="-fx-border-color: #ffffff;">
                <font>
-                  <Font name="Arial" size="10.0" />
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </TextArea>
             <ImageView fitHeight="98.0" fitWidth="92.0" layoutX="38.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">

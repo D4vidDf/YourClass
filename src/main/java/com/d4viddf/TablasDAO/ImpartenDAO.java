@@ -13,7 +13,7 @@ public class ImpartenDAO implements Dao<Imparten> {
     static Scanner teclado = new Scanner(System.in);
 
     @Override
-    public Imparten get(long id) {
+    public Imparten get(Connection con, int id) {
         return null;
     }
 

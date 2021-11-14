@@ -17,7 +17,7 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
     static Scanner teclado = new Scanner (System.in);
 
     @Override
-    public Asignaturas get(long id) {
+    public Asignaturas get(Connection con, int id) {
         return null;
     }
 

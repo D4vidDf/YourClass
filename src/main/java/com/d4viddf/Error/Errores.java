@@ -122,4 +122,23 @@ public class Errores {
             ei.printStackTrace();
         }
     }
+
+    public void mostrar(String string) {
+        FXMLLoader fx = new FXMLLoader();
+        fx.setLocation(getClass().getResource("/fxml/error.fxml"));
+        ErrorController cf = new ErrorController();
+        cf.setError(string);
+        fx.setController(cf);
+        Parent froot;
+        try {
+            froot = fx.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(froot));
+            stage.setTitle("Atención");
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ei) {
+            ei.printStackTrace();
+        }
+    }
 }
