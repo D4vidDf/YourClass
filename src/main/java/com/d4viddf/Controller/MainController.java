@@ -132,16 +132,15 @@ Errores errores = new Errores();
     @FXML
     private void abrirProfesor(ActionEvent ae) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/error.fxml"));
-        ErrorController c = new ErrorController();
-        c.setError("error");
+        loader.setLocation(getClass().getResource("/fxml/buscarProfesor.fxml"));
+        ProfesorController c = new ProfesorController();
         loader.setController(c);
         Parent root;
         try {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Alumnos");
+            stage.setTitle("Profesores");
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -158,15 +157,15 @@ Errores errores = new Errores();
     @FXML
     private void abrirAsignatura(ActionEvent ae) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
-        AlumnosController c = new AlumnosController();
+        loader.setLocation(getClass().getResource("/fxml/buscarAsignatura.fxml"));
+        AsignaturaController c = new AsignaturaController();
         loader.setController(c);
         Parent root;
         try {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Alumnos");
+            stage.setTitle("Asignaturas");
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -183,15 +182,15 @@ Errores errores = new Errores();
     @FXML
     private void abrirDepartamento(ActionEvent ae) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
-        AlumnosController c = new AlumnosController();
+        loader.setLocation(getClass().getResource("/fxml/buscarDepartamento.fxml"));
+        DepartamentoController c = new DepartamentoController();
         loader.setController(c);
         Parent root;
         try {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Alumnos");
+            stage.setTitle("Departamentos");
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -208,15 +207,15 @@ Errores errores = new Errores();
     @FXML
     private void abrirImparten(ActionEvent ae) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/buscarAlumno.fxml"));
-        AlumnosController c = new AlumnosController();
+        loader.setLocation(getClass().getResource("/fxml/buscarImparten.fxml"));
+        ImpartenController c = new ImpartenController();
         loader.setController(c);
         Parent root;
         try {
             root = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Alumnos");
+            stage.setTitle("Imparten");
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {

@@ -59,7 +59,7 @@
             </Label>
             <Label layoutX="35.0" layoutY="362.0" text="Powered  by D4vidDf">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
             <ImageView fitHeight="21.0" fitWidth="18.0" layoutX="601.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
@@ -67,36 +67,36 @@
                   <Image url="@../drawable/settings.png" />
                </image>
             </ImageView>
-            <Button id="btnBD" layoutX="419.0" layoutY="292.0" mnemonicParsing="false" onAction="#abrirModificador" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Modificación Base Datos" textFill="WHITE">
+            <Button id="btnBD" layoutX="412.0" layoutY="270.0" mnemonicParsing="false" onAction="#abrirModificador" prefHeight="29.0" prefWidth="195.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Modificación Base Datos" textFill="WHITE">
                <font>
-                  <Font name="Arial Black" size="12.0" />
+                  <Font name="Arial Black" size="13.0" />
                </font></Button>
-            <Button id="btnAl" layoutX="433.0" layoutY="72.0" mnemonicParsing="false" onAction="#abrirAlumno" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Alumnos" textFill="WHITE">
+            <Button id="btnAl" layoutX="433.0" layoutY="78.0" mnemonicParsing="false" onAction="#abrirAlumno" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Alumnos" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Button>
-            <Button id="btnPr" layoutX="433.0" layoutY="104.0" mnemonicParsing="false" onAction="#abrirProfesor" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Profesores" textFill="WHITE">
+            <Button id="btnPr" layoutX="433.0" layoutY="112.0" mnemonicParsing="false" onAction="#abrirProfesor" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Profesores" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Button>
-            <Button id="btnAsg" layoutX="433.0" layoutY="134.0" mnemonicParsing="false" onAction="#abrirAsignatura" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Asignaturas" textFill="WHITE">
+            <Button id="btnAsg" layoutX="433.0" layoutY="147.0" mnemonicParsing="false" onAction="#abrirAsignatura" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Asignaturas" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font></Button>
-            <Button id="btnDt" layoutX="433.0" layoutY="165.0" mnemonicParsing="false" onAction="#abrirDepartamento" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Departamentos" textFill="WHITE">
+            <Button id="btnDt" layoutX="433.0" layoutY="182.0" mnemonicParsing="false" onAction="#abrirDepartamento" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Departamentos" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font></Button>
-            <Button id="btnI" layoutX="434.0" layoutY="200.0" mnemonicParsing="false" onAction="#abrirImparten" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Imparten" textFill="WHITE">
+            <Button id="btnI" layoutX="434.0" layoutY="216.0" mnemonicParsing="false" onAction="#abrirImparten" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 10; -fx-background-color: #3A2D32;" text="Imparten" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font></Button>
             <Button layoutX="594.0" layoutY="356.0" mnemonicParsing="false" onAction="#abrirSettings" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent;" />
-            <Hyperlink layoutX="24.0" layoutY="24.0" onAction="#url" text="?">
+            <Hyperlink layoutX="24.0" layoutY="24.0" onAction="#url" text="?" textFill="#513f3f">
                <font>
-                  <Font name="Arial Black" size="18.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Hyperlink>
          </children>

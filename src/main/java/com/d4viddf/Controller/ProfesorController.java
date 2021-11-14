@@ -28,7 +28,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class AlumnosController extends DBViewController implements Initializable {
+public class ProfesorController extends DBViewController implements Initializable {
     Errores errores = new Errores();
     @FXML
     private TableView<Alumnos> tabAlumnos;
