@@ -130,9 +130,9 @@ public class AlumnosController extends DBViewController implements Initializable
      */
     private void findByExpediente() {
         int id = Integer.parseInt(txtBusqueda.getText());
-        List<Alumnos> als = new ArrayList<>();
+        Alumnos als = new Alumnos();
         try {
-            als.add(mySQLDAOFactory.getAlumnosDAO().get(mySQLDAOFactory.getConnection(), id));
+            als = mySQLDAOFactory.getAlumnosDAO().get(mySQLDAOFactory.getConnection(), id);
         } catch (SQLException e) {
             errores.mostrar("Por favor,\nAñade el Número de expediente para poder buscar");
         }
@@ -147,7 +147,7 @@ public class AlumnosController extends DBViewController implements Initializable
         try {
             als = mySQLDAOFactory.getAlumnosDAO().getByDNI(mySQLDAOFactory.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            errores.muestraErrorSQL(e);
         }
         tabAlumnos.getItems().setAll(als);
     }
@@ -163,7 +163,7 @@ public class AlumnosController extends DBViewController implements Initializable
             als = mySQLDAOFactory.getAlumnosDAO().getByRowLike(mySQLDAOFactory.getConnection(), row,
                     txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            errores.muestraErrorSQL(e);
         }
         tabAlumnos.getItems().setAll(als);
     }
@@ -176,7 +176,7 @@ public class AlumnosController extends DBViewController implements Initializable
         try {
             als = mySQLDAOFactory.getAlumnosDAO().getByYear(mySQLDAOFactory.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            errores.muestraErrorSQL(e);
         }
         tabAlumnos.getItems().setAll(als);
     }
@@ -190,7 +190,7 @@ public class AlumnosController extends DBViewController implements Initializable
         try {
             als = mySQLDAOFactory.getAlumnosDAO().getByProfesor(mySQLDAOFactory.getConnection(), txtBusqueda.getText());
         } catch (SQLException e) {
-            e.printStackTrace();
+            errores.muestraErrorSQL(e);
         }
         tabAlumnos.getItems().setAll(als);
     }

@@ -4,6 +4,15 @@ public class Departamentos {
     public int id;
     public String nombre;
     public float presupuesto;
+    public String desc;
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
     public int getId() {
         return this.id;
@@ -29,10 +38,11 @@ public class Departamentos {
         this.presupuesto = presupuesto;
     }
 
-    public Departamentos(int id, String nombre, float presupuesto) {
+    public Departamentos(int id, String nombre, float presupuesto, String desc) {
         this.id = id;
         this.nombre = nombre;
         this.presupuesto = presupuesto;
+        this.desc = desc;
     }
 
     public Departamentos() {

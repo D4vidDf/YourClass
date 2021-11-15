@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 
 import com.d4viddf.Error.Errores;
 import com.d4viddf.Tablas.Alumnos;
+import com.d4viddf.Tablas.Departamentos;
 import com.d4viddf.TablasDAO.AlumnosDAO;
+import com.d4viddf.TablasDAO.DepartamentosDAO;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,25 +33,21 @@ import javafx.stage.Stage;
 public class DepartamentoController extends DBViewController implements Initializable {
     Errores errores = new Errores();
     @FXML
-    private TableView<Alumnos> tabAlumnos;
+    private TableView<Departamentos> tabDepartamentos;
     @FXML
-    private TableColumn<Alumnos, Integer> colNum;
+    private TableColumn<Departamentos, Integer> colNum;
     @FXML
-    private TableColumn<Alumnos, String> colDNI;
+    private TableColumn<Departamentos, String> colNombre;
     @FXML
-    private TableColumn<Alumnos, String> colNombre;
+    private TableColumn<Departamentos, String> colPresupuesto;
     @FXML
-    private TableColumn<Alumnos, String> colApellidos;
-    @FXML
-    private TableColumn<Alumnos, LocalDate> colNac;
+    private TableColumn<Departamentos, String> colDesc;
     @FXML
     private ComboBox<String> cbxBuscarPor;
     @FXML
-    private TextField txtBusqueda, txtNum, txtApellidos, txtNombre, txtDNI, path;
+    private TextField txtBusqueda, txtID, txtPresupuesto, txtNombre, path;
     @FXML
-    private DatePicker fecha;
-    @FXML
-    private TextArea estado;
+    private TextArea estado, txtDesc;
 
     private String selectedItem = null;
 
@@ -60,14 +58,12 @@ public class DepartamentoController extends DBViewController implements Initiali
     @FXML
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        colNum.setCellValueFactory(new PropertyValueFactory<Alumnos, Integer>("expediente"));
-        colDNI.setCellValueFactory(new PropertyValueFactory<Alumnos, String>("DNI"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Alumnos, String>("nombre"));
-        colApellidos.setCellValueFactory(new PropertyValueFactory<Alumnos, String>("apellidos"));
-        colNac.setCellValueFactory(new PropertyValueFactory<Alumnos, LocalDate>("nacimiento"));
+        colNum.setCellValueFactory(new PropertyValueFactory<Departamentos, Integer>("id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<Departamentos, String>("nombre"));
+        colPresupuesto.setCellValueFactory(new PropertyValueFactory<Departamentos, String>("presupuesto"));
+        colDesc.setCellValueFactory(new PropertyValueFactory<Departamentos, String>("desc"));
 
-        cbxBuscarPor.getItems().setAll("Número de expediente", "DNI", "Nombre", "Apellidos", "Año de nacimiento",
-                "DNI de profesor", "Todos");
+        cbxBuscarPor.getItems().setAll("Número departamento", "Nombre", "Presupuesto", "Profesor", "Todos");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> selected, String oldI, String newI) {
@@ -85,23 +81,17 @@ public class DepartamentoController extends DBViewController implements Initiali
     private void buscar(ActionEvent ae) {
         if (selectedItem != null) {
             switch (selectedItem) {
-            case "Número de expediente":
-                findByExpediente();
-                break;
-            case "DNI":
-                findByDNI();
+            case "Número departamento":
+                findByDepartamento();
                 break;
             case "Nombre":
-                findByRowLike(AlumnosDAO.ROW_NOMBRE);
+                findByRowLike("nombre");
                 break;
-            case "Apellidos":
-                findByRowLike(AlumnosDAO.ROW_APELLIDOS);
-                break;
-            case "Año de nacimiento":
-                findByAnho();
-                break;
-            case "DNI de profesor":
+            case "Profesor":
                 findByProfesor();
+                break;
+            case "Presupuesto":
+                findByPresupuesto();
                 break;
             case "Todos":
                 mostrar();
@@ -115,41 +105,47 @@ public class DepartamentoController extends DBViewController implements Initiali
      * Método que muestra todos los alumnos existentes en la tabla.
      */
     private void mostrar() {
-        List<Alumnos> als = new ArrayList<>();
+        List<Departamentos> als = new ArrayList<>();
         try {
-            als = mySQLDAOFactory.getAlumnosDAO().getAll(mySQLDAOFactory.getConnection());
+            als = mySQLDAOFactory.getDepartamentosDAO().getAll(mySQLDAOFactory.getConnection());
         } catch (SQLException e) {
             errores.muestraErrorSQL(e);
         }
-        tabAlumnos.getItems().setAll(als);
+        tabDepartamentos.getItems().setAll(als);
     }
 
     /**
      * Método que muestra al alumno que coincida con el número de expediente del
      * TextField en la tabla
      */
-    private void findByExpediente() {
+    private void findByDepartamento() {
         int id = Integer.parseInt(txtBusqueda.getText());
-        List<Alumnos> als = new ArrayList<>();
+        Departamentos departamentos = new Departamentos();
+
         try {
-            als.add(mySQLDAOFactory.getAlumnosDAO().get(mySQLDAOFactory.getConnection(), id));
+            departamentos = mySQLDAOFactory.getDepartamentosDAO().get(mySQLDAOFactory.getConnection(), id);
         } catch (SQLException e) {
-            errores.mostrar("Por favor,\nAñade el Número de expediente para poder buscar");
+            errores.mostrar("Por favor,\nAñade el Número del departamento para poder buscar");
         }
-        tabAlumnos.getItems().setAll(als);
+        tabDepartamentos.getItems().setAll(departamentos);
+
     }
 
     /**
-     * Método que muestra al Alumno que coincida con el DNI del campo TextField
+     * Método que muestra el departamento que coincida con el presupuesto del
+     * TextField en la tabla
      */
-    private void findByDNI() {
-        List<Alumnos> als = new ArrayList<>();
+    private void findByPresupuesto() {
+        int id = Integer.parseInt(txtBusqueda.getText());
+        List<Departamentos> als = new ArrayList<>();
         try {
-            als = mySQLDAOFactory.getAlumnosDAO().getByDNI(mySQLDAOFactory.getConnection(), txtBusqueda.getText());
+            als = mySQLDAOFactory.getDepartamentosDAO().getByPresupuesto(mySQLDAOFactory.getConnection(), id);
         } catch (SQLException e) {
-            e.printStackTrace();
+            errores.muestraErrorSQL(e);
+        } catch (Exception e){
+            errores.muestraError(e);
         }
-        tabAlumnos.getItems().setAll(als);
+        tabDepartamentos.getItems().setAll(als);
     }
 
     /**
@@ -158,27 +154,13 @@ public class DepartamentoController extends DBViewController implements Initiali
      * @param row
      */
     private void findByRowLike(String row) {
-        List<Alumnos> als = new ArrayList<>();
-        try {
-            als = mySQLDAOFactory.getAlumnosDAO().getByRowLike(mySQLDAOFactory.getConnection(), row,
-                    txtBusqueda.getText());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        tabAlumnos.getItems().setAll(als);
-    }
-
-    /**
-     * Mëtodo que muestra a los Alumnos que coincidan con la fecha de nacimiento
-     */
-    private void findByAnho() {
-        List<Alumnos> als = new ArrayList<>();
-        try {
-            als = mySQLDAOFactory.getAlumnosDAO().getByYear(mySQLDAOFactory.getConnection(), txtBusqueda.getText());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        tabAlumnos.getItems().setAll(als);
+        List<Departamentos> als = new ArrayList<>();
+        /*
+         * try { als =
+         * mySQLDAOFactory.getAlumnosDAO().getByRowLike(mySQLDAOFactory.getConnection(),
+         * row, txtBusqueda.getText()); } catch (SQLException e) { e.printStackTrace();
+         * } tabDepartamentos.getItems().setAll(als);
+         */
     }
 
     /**
@@ -186,13 +168,13 @@ public class DepartamentoController extends DBViewController implements Initiali
      * asignatura matriculada
      */
     private void findByProfesor() {
-        List<Alumnos> als = new ArrayList<>();
-        try {
-            als = mySQLDAOFactory.getAlumnosDAO().getByProfesor(mySQLDAOFactory.getConnection(), txtBusqueda.getText());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        tabAlumnos.getItems().setAll(als);
+        List<Departamentos> als = new ArrayList<>();
+        /*
+         * try { als =
+         * mySQLDAOFactory.getAlumnosDAO().getByProfesor(mySQLDAOFactory.getConnection()
+         * , txtBusqueda.getText()); } catch (SQLException e) { e.printStackTrace(); }
+         * tabDepartamentos.getItems().setAll(als);
+         */
     }
 
     /**
@@ -201,12 +183,12 @@ public class DepartamentoController extends DBViewController implements Initiali
      * @param ae
      */
     @FXML
-    private void crearalumno(ActionEvent ae) {
+    private void crear(ActionEvent ae) {
         try {
-            AlumnosDAO alm = new AlumnosDAO();
-            alm.insertar(mySQLDAOFactory.getConnection(), txtNombre.getText().toString(),
-                    txtApellidos.getText().toString(), txtDNI.getText().toString(),
-                    Integer.parseInt(txtNum.getText().toString()), fecha.getValue());
+            DepartamentosDAO alm = new DepartamentosDAO();
+            alm.insertar(mySQLDAOFactory.getConnection(), Integer.parseInt(txtID.getText().toString()),
+                    txtNombre.getText().toString(), Integer.parseInt(txtPresupuesto.getText().toString()),
+                    txtDesc.getText().toString());
         } catch (Exception e) {
             errores.muestraError(e);
         }
@@ -237,14 +219,16 @@ public class DepartamentoController extends DBViewController implements Initiali
         if (path.getText().isEmpty()) {
             guardar();
             try {
-                mySQLDAOFactory.getAlumnosDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
+                mySQLDAOFactory.getDepartamentosDAO().exportar(mySQLDAOFactory.getConnection(),
+                        path.getText().toString());
                 estado.setText("Se ha exportado correctamente.");
             } catch (SQLException e) {
                 errores.muestraErrorSQL(e);
             }
         } else {
             try {
-                mySQLDAOFactory.getAlumnosDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
+                mySQLDAOFactory.getDepartamentosDAO().exportar(mySQLDAOFactory.getConnection(),
+                        path.getText().toString());
                 estado.setText("Se ha exportado correctamente.");
             } catch (SQLException e) {
                 errores.muestraErrorSQL(e);
@@ -277,7 +261,7 @@ public class DepartamentoController extends DBViewController implements Initiali
         if (path.getText().isEmpty()) {
             abrir(ae);
             try {
-                mySQLDAOFactory.getAlumnosDAO().insertarLote(mySQLDAOFactory.getConnection(),
+                mySQLDAOFactory.getDepartamentosDAO().insertarLote(mySQLDAOFactory.getConnection(),
                         path.getText().toString());
                 estado.setText("Se han importado correctamente los datos.");
             } catch (SQLException se) {
@@ -287,7 +271,7 @@ public class DepartamentoController extends DBViewController implements Initiali
             }
         } else {
             try {
-                mySQLDAOFactory.getAlumnosDAO().insertarLote(mySQLDAOFactory.getConnection(),
+                mySQLDAOFactory.getDepartamentosDAO().insertarLote(mySQLDAOFactory.getConnection(),
                         path.getText().toString());
                 estado.setText("Se han importado correctamente los datos.");
             } catch (SQLException se) {
