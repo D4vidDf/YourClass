@@ -51,7 +51,7 @@ public class AlumnosController extends DBViewController implements Initializable
     @FXML
     private TextArea estado;
 
-    private String selectedItem = null;
+    private String selectedItem = "";
 
     /**
      * Método que inicializa la tabla con las columnas asigandas para cada atributo
