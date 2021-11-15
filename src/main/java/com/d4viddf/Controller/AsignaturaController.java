@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.d4viddf.Error.Errores;
 import com.d4viddf.Tablas.Asignaturas;
 import com.d4viddf.TablasDAO.AlumnosDAO;
+import com.d4viddf.TablasDAO.AsignaturasDAO;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,7 +18,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -73,10 +73,11 @@ public class AsignaturaController extends DBViewController implements Initializa
      */
     @FXML
     private void buscar(ActionEvent ae) {
-        if (txtBusqueda.getText().isBlank() && selectedItem.isEmpty()){
+        if (selectedItem.isEmpty() && txtBusqueda.getText().isEmpty()) {
             mostrar();
-        }
-        else if (txtBusqueda.getText().isEmpty()) {
+        } else if (selectedItem.equals("Todos") && txtBusqueda.getText().isEmpty()) {
+            mostrar();
+        }else if (txtBusqueda.getText().isEmpty()) {
             errores.mostrar("Por favor,\nIntroduce un valor para realizar la búsqueda");
         } else {
             if (selectedItem != null) {
@@ -85,10 +86,10 @@ public class AsignaturaController extends DBViewController implements Initializa
                     findByID();
                     break;
                 case "Nombre":
-                    findByRowLike(AlumnosDAO.ROW_NOMBRE);
+                    findByRowLike(AsignaturasDAO.ROW_NOMBRE);
                     break;
                 case "Curso":
-                    findByRowLike(AlumnosDAO.ROW_APELLIDOS);
+                    findByRowLike(AsignaturasDAO.ROW_CURSO);
                     break;
                 case "Todos":
                     mostrar();
@@ -117,14 +118,14 @@ public class AsignaturaController extends DBViewController implements Initializa
      * TextField en la tabla
      */
     private void findByID() {
-        /*int id = Integer.parseInt(txtBusqueda.getText());
-        List<Alumnos> als = new ArrayList<>();
+        int id = Integer.parseInt(txtBusqueda.getText());
+        Asignaturas asg = new Asignaturas();
         try {
-            als.add(mySQLDAOFactory.getAlumnosDAO().get(mySQLDAOFactory.getConnection(), id));
+            asg = mySQLDAOFactory.getAsignaturasDAO().get(mySQLDAOFactory.getConnection(), id);
         } catch (SQLException e) {
             errores.mostrar("Por favor,\nAñade el Número de expediente para poder buscar");
         }
-        tabAlumnos.getItems().setAll(als);*/
+        tabAlumnos.getItems().setAll(asg);
     }
 
     /**
@@ -133,14 +134,14 @@ public class AsignaturaController extends DBViewController implements Initializa
      * @param row
      */
     private void findByRowLike(String row) {
-        /*List<Alumnos> als = new ArrayList<>();
+        List<Asignaturas> asg = new ArrayList<>();
         try {
-            als = mySQLDAOFactory.getAlumnosDAO().getByRowLike(mySQLDAOFactory.getConnection(), row,
+            asg = mySQLDAOFactory.getAsignaturasDAO().getByRowLike(mySQLDAOFactory.getConnection(), row,
                     txtBusqueda.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tabAlumnos.getItems().setAll(als);*/
+        tabAlumnos.getItems().setAll(asg);
     }
 
 
@@ -151,15 +152,13 @@ public class AsignaturaController extends DBViewController implements Initializa
      * @param ae
      */
     @FXML
-    private void crearalumno(ActionEvent ae) {
-        /*try {
-            AlumnosDAO alm = new AlumnosDAO();
-            alm.insertar(mySQLDAOFactory.getConnection(), txtNombre.getText().toString(),
-                    txtApellidos.getText().toString(), txtDNI.getText().toString(),
-                    Integer.parseInt(txtNum.getText().toString()), fecha.getValue());
+    private void crear(ActionEvent ae) {
+        try {
+            AsignaturasDAO asg = new AsignaturasDAO();
+            asg.insertar(mySQLDAOFactory.getConnection(),Integer.parseInt(txtNum.getText().toString()), txtNombre.getText().toString(), txtCurso.getText().toString());
         } catch (Exception e) {
             errores.muestraError(e);
-        }*/
+        }
     }
 
     /**
@@ -187,14 +186,14 @@ public class AsignaturaController extends DBViewController implements Initializa
         if (path.getText().isEmpty()) {
             guardar();
             try {
-                mySQLDAOFactory.getAlumnosDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
+                mySQLDAOFactory.getAsignaturasDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
                 estado.setText("Se ha exportado correctamente.");
             } catch (SQLException e) {
                 errores.muestraErrorSQL(e);
             }
         } else {
             try {
-                mySQLDAOFactory.getAlumnosDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
+                mySQLDAOFactory.getAsignaturasDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
                 estado.setText("Se ha exportado correctamente.");
             } catch (SQLException e) {
                 errores.muestraErrorSQL(e);
@@ -227,7 +226,7 @@ public class AsignaturaController extends DBViewController implements Initializa
         if (path.getText().isEmpty()) {
             abrir(ae);
             try {
-                mySQLDAOFactory.getAlumnosDAO().insertarLote(mySQLDAOFactory.getConnection(),
+                mySQLDAOFactory.getAsignaturasDAO().insertarLote(mySQLDAOFactory.getConnection(),
                         path.getText().toString());
                 estado.setText("Se han importado correctamente los datos.");
             } catch (SQLException se) {
@@ -237,7 +236,7 @@ public class AsignaturaController extends DBViewController implements Initializa
             }
         } else {
             try {
-                mySQLDAOFactory.getAlumnosDAO().insertarLote(mySQLDAOFactory.getConnection(),
+                mySQLDAOFactory.getAsignaturasDAO().insertarLote(mySQLDAOFactory.getConnection(),
                         path.getText().toString());
                 estado.setText("Se han importado correctamente los datos.");
             } catch (SQLException se) {

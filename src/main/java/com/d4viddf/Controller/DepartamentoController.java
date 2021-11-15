@@ -77,6 +77,8 @@ public class DepartamentoController extends DBViewController implements Initiali
     private void buscar(ActionEvent ae) {
         if (selectedItem.isEmpty() && txtBusqueda.getText().isEmpty()) {
             mostrar();
+        } else if (selectedItem.equals("Todos") && txtBusqueda.getText().isEmpty()) {
+            mostrar();
         } else if (txtBusqueda.getText().isEmpty()) {
             errores.mostrar("Por favor,\nIntroduce un valor para realizar la búsqueda");
         } else {
@@ -117,8 +119,8 @@ public class DepartamentoController extends DBViewController implements Initiali
     }
 
     /**
-     * Método que muestra el departamento que coincida con el id del
-     * TextField en la tabla
+     * Método que muestra el departamento que coincida con el id del TextField en la
+     * tabla
      */
     private void findByDepartamento() {
         int id = Integer.parseInt(txtBusqueda.getText());
@@ -195,14 +197,14 @@ public class DepartamentoController extends DBViewController implements Initiali
                 || txtPresupuesto.getText().toString().isBlank() || txtDesc.getText().toString().isBlank()) {
             errores.mostrar("Por favor,\nRellene todos los datos del alumno");
         } else
-        try {
-            DepartamentosDAO alm = new DepartamentosDAO();
-            alm.insertar(mySQLDAOFactory.getConnection(), Integer.parseInt(txtID.getText().toString()),
-                    txtNombre.getText().toString(), Integer.parseInt(txtPresupuesto.getText().toString()),
-                    txtDesc.getText().toString());
-        } catch (Exception e) {
-            errores.muestraError(e);
-        }
+            try {
+                DepartamentosDAO alm = new DepartamentosDAO();
+                alm.insertar(mySQLDAOFactory.getConnection(), Integer.parseInt(txtID.getText().toString()),
+                        txtNombre.getText().toString(), Integer.parseInt(txtPresupuesto.getText().toString()),
+                        txtDesc.getText().toString());
+            } catch (Exception e) {
+                errores.muestraError(e);
+            }
     }
 
     /**

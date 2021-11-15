@@ -47,7 +47,7 @@
 
 <VBox prefHeight="420.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <TabPane prefHeight="435.0" prefWidth="640.0" style="-fx-background-color: #ffffff; -fx-region-background: #ffffff;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="435.0" prefWidth="640.0" style="-fx-background-color: #ffffff; -fx-region-background: #ffffff;" stylesheets="@../styles/tabpane.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Buscar Asignatura">
             <content>
@@ -60,9 +60,9 @@
                         </Button>
                         <TableView fx:id="tabAlumnos" layoutX="14.0" layoutY="47.0" prefHeight="334.0" prefWidth="612.0" style="-fx-background-color: #ffffff;">
                           <columns>
-                            <TableColumn fx:id="colNum" prefWidth="196.0" style="-fx-background-color: #ffffff; -fx-border-color: #3A2D32; -fx-border-radius: 5;" text="Código" />
-                              <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #3A2D32;" text="Nombre" />
-                              <TableColumn fx:id="colCurso" minWidth="0.0" prefWidth="213.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #3A2D32;" text="Curso" />
+                            <TableColumn fx:id="colNum" editable="false" prefWidth="196.0" style="-fx-background-color: #ffffff; -fx-border-color: #3A2D32; -fx-border-radius: 5;" text="Código" />
+                              <TableColumn fx:id="colNombre" editable="false" minWidth="0.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #3A2D32;" text="Nombre" />
+                              <TableColumn fx:id="colCurso" editable="false" minWidth="0.0" prefWidth="213.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #3A2D32;" text="Curso" />
                           </columns>
                         </TableView>
                         <ComboBox id="cbxBuscarPor" fx:id="cbxBuscarPor" layoutX="14.0" layoutY="13.0" prefWidth="150.0" promptText="Buscar por" style="-fx-background-radius: 10; -fx-border-color: #3A2D32 #3A2D32 #3A2D32 #3A2D32; -fx-border-radius: 10; -fx-background-color: #ffffff;" />
@@ -76,7 +76,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                      <children>
                         <TextField fx:id="txtNum" layoutX="342.0" layoutY="101.0" prefHeight="36.0" prefWidth="235.0" promptText="Código" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
-                        <Button layoutX="459.0" layoutY="321.0" mnemonicParsing="false" onAction="#crearalumno" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Crear" textFill="WHITE">
+                        <Button layoutX="459.0" layoutY="321.0" mnemonicParsing="false" onAction="#crear" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Crear" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>

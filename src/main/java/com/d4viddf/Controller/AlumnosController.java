@@ -83,7 +83,9 @@ public class AlumnosController extends DBViewController implements Initializable
      */
     @FXML
     private void buscar(ActionEvent ae) {
-        if (selectedItem.equals("Todos") && txtBusqueda.getText().isEmpty()) {
+        if (selectedItem.isEmpty() && txtBusqueda.getText().isEmpty()) {
+            mostrar();
+        } else if (selectedItem.equals("Todos") && txtBusqueda.getText().isEmpty()) {
             mostrar();
         } else if (txtBusqueda.getText().isEmpty()) {
             errores.mostrar("Por favor,\nIntroduce un valor para realizar la búsqueda");

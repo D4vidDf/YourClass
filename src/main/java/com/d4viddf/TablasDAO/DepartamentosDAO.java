@@ -184,7 +184,7 @@ public class DepartamentosDAO implements Dao<Departamentos> {
     public List<Departamentos> getByProfesor(Connection con, String string) {
         List <Departamentos> lista = new ArrayList<>();
         try {
-            PreparedStatement s = con.prepareStatement("select * from departamentos d inner join profesores p on p.departamentos=d.id where profesor like ?");
+            PreparedStatement s = con.prepareStatement("select * from departamentos d inner join profesores p on p.departamentos=d.id where p.cod_prof like ?");
             s.setString(1, string);
             ResultSet rs = s.executeQuery();
             while(rs.next()) {

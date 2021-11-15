@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
@@ -42,6 +43,7 @@ Errores errores = new Errores();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Ajustes");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -88,6 +90,7 @@ Errores errores = new Errores();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Modificación de la base de datos");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -114,6 +117,7 @@ Errores errores = new Errores();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Alumnos");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -139,6 +143,7 @@ Errores errores = new Errores();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Profesores");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -164,6 +169,7 @@ Errores errores = new Errores();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Asignaturas");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -189,6 +195,7 @@ Errores errores = new Errores();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Departamentos");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
@@ -214,6 +221,7 @@ Errores errores = new Errores();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Imparten");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException e) {

@@ -11,6 +11,7 @@ import com.d4viddf.Controller.ErrorController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Errores {
@@ -28,6 +29,7 @@ public class Errores {
             Stage stage = new Stage();
             stage.setScene(new Scene(froot));
             stage.setTitle("Error");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException ei) {
@@ -50,6 +52,7 @@ public class Errores {
             Stage stage = new Stage();
             stage.setScene(new Scene(froot));
             stage.setTitle("Error");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException ei) {
@@ -72,6 +75,7 @@ public class Errores {
             Stage stage = new Stage();
             stage.setScene(new Scene(froot));
             stage.setTitle("Error");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException ei) {
@@ -94,6 +98,7 @@ public class Errores {
             Stage stage = new Stage();
             stage.setScene(new Scene(froot));
             stage.setTitle("Error");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException ei) {
@@ -116,6 +121,7 @@ public class Errores {
             Stage stage = new Stage();
             stage.setScene(new Scene(froot));
             stage.setTitle("Error");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException ei) {
@@ -135,6 +141,7 @@ public class Errores {
             Stage stage = new Stage();
             stage.setScene(new Scene(froot));
             stage.setTitle("Atención");
+            stage.getIcons().add(new Image("/drawable/blackboard.png"));
             stage.setResizable(false);
             stage.show();
         } catch (IOException ei) {

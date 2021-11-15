@@ -19,8 +19,8 @@ public class Crear {
             st.execute("drop table if exists Asignaturas");
             
             st.execute("CREATE TABLE `Profesores`(    `dni` CHAR(9) NOT NULL,    `nombre` VARCHAR(20) NOT NULL,    `apellidos` VARCHAR(20) NOT NULL,    `fecha_nacimiento` DATE NOT NULL,    `departamentos` INT NOT NULL, `cod_prof` INT NOT NULL primary key );");
-            st.execute("CREATE TABLE Departamentos(    id INT NOT NULL Primary Key,    nombre VARCHAR(20) NOT NULL,    presupuesto INT NOT NULL, descripcion VARCHAR(40) NOT NULL);");
-            st.execute("CREATE TABLE Alumnos(expediente INT NOT NULL Primary Key,dni CHAR(9) NOT NULL,    nombre VARCHAR(20) NOT NULL,    apellidos VARCHAR(20) NOT NULL,    fecha_nacimiento DATE NOT NULL);");
+            st.execute("CREATE TABLE Departamentos(    id INT NOT NULL Primary Key,    nombre VARCHAR(20) NOT NULL,    presupuesto INT NOT NULL, descripcion longtext NOT NULL);");
+            st.execute("CREATE TABLE Alumnos(expediente INT NOT NULL Primary Key,dni CHAR(9) NOT NULL,    nombre VARCHAR(20) NOT NULL,    apellidos longtext NOT NULL,    fecha_nacimiento DATE NOT NULL);");
             st.execute("CREATE TABLE Asignaturas(    id INT  NOT NULL primary key ,    nombre VARCHAR(20) NOT NULL, curso VARCHAR(20) NOT NULL);");
             st.execute("CREATE TABLE Imparten(    curso INT NOT NULL,    alumno INT NOT NULL,    profesor INT NOT NULL,   asignatura INT NOT NULL);");
             

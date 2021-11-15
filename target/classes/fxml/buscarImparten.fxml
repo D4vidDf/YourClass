@@ -48,7 +48,7 @@
 
 <VBox prefHeight="420.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <TabPane prefHeight="435.0" prefWidth="640.0" style="-fx-background-color: #ffffff; -fx-region-background: #ffffff;" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="435.0" prefWidth="640.0" style="-fx-background-color: #ffffff; -fx-region-background: #ffffff;" stylesheets="@../styles/tabpane.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Buscar Alumno">
             <content>
