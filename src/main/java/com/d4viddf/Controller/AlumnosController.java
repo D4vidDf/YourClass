@@ -83,32 +83,38 @@ public class AlumnosController extends DBViewController implements Initializable
      */
     @FXML
     private void buscar(ActionEvent ae) {
-        if (selectedItem != null) {
-            switch (selectedItem) {
-            case "Número de expediente":
-                findByExpediente();
-                break;
-            case "DNI":
-                findByDNI();
-                break;
-            case "Nombre":
-                findByRowLike(AlumnosDAO.ROW_NOMBRE);
-                break;
-            case "Apellidos":
-                findByRowLike(AlumnosDAO.ROW_APELLIDOS);
-                break;
-            case "Año de nacimiento":
-                findByAnho();
-                break;
-            case "DNI de profesor":
-                findByProfesor();
-                break;
-            case "Todos":
-                mostrar();
-                break;
-            }
-        } else
+        if (selectedItem.equals("Todos") && txtBusqueda.getText().isEmpty()) {
             mostrar();
+        } else if (txtBusqueda.getText().isEmpty()) {
+            errores.mostrar("Por favor,\nIntroduce un valor para realizar la búsqueda");
+        } else {
+            if (selectedItem != null) {
+                switch (selectedItem) {
+                case "Número de expediente":
+                    findByExpediente();
+                    break;
+                case "DNI":
+                    findByDNI();
+                    break;
+                case "Nombre":
+                    findByRowLike(AlumnosDAO.ROW_NOMBRE);
+                    break;
+                case "Apellidos":
+                    findByRowLike(AlumnosDAO.ROW_APELLIDOS);
+                    break;
+                case "Año de nacimiento":
+                    findByAnho();
+                    break;
+                case "DNI de profesor":
+                    findByProfesor();
+                    break;
+                case "Todos":
+                    mostrar();
+                    break;
+                }
+            } else
+                mostrar();
+        }
     }
 
     /**
@@ -202,14 +208,19 @@ public class AlumnosController extends DBViewController implements Initializable
      */
     @FXML
     private void crearalumno(ActionEvent ae) {
-        try {
-            AlumnosDAO alm = new AlumnosDAO();
-            alm.insertar(mySQLDAOFactory.getConnection(), txtNombre.getText().toString(),
-                    txtApellidos.getText().toString(), txtDNI.getText().toString(),
-                    Integer.parseInt(txtNum.getText().toString()), fecha.getValue());
-        } catch (Exception e) {
-            errores.muestraError(e);
-        }
+        if (txtNombre.getText().toString().isBlank() || txtApellidos.getText().toString().isBlank()
+                || txtDNI.getText().toString().isBlank() || txtNum.getText().toString().isBlank()
+                || fecha.getValue().equals("")) {
+            errores.mostrar("Por favor,\nRellene todos los datos del alumno");
+        } else
+            try {
+                AlumnosDAO alm = new AlumnosDAO();
+                alm.insertar(mySQLDAOFactory.getConnection(), txtNombre.getText().toString(),
+                        txtApellidos.getText().toString(), txtDNI.getText().toString(),
+                        Integer.parseInt(txtNum.getText().toString()), fecha.getValue());
+            } catch (Exception e) {
+                errores.muestraError(e);
+            }
     }
 
     /**

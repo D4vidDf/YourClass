@@ -24,6 +24,7 @@ public class DepartamentosDAO implements Dao<Departamentos> {
     private static FileWriter file;
     Errores errores = new Errores();
     static Scanner teclado = new Scanner(System.in);
+
     @Override
     public Departamentos get(Connection con, int id) {
         Departamentos departamentos = new Departamentos();
@@ -129,7 +130,7 @@ public class DepartamentosDAO implements Dao<Departamentos> {
     }
 
     /**
-     * Método para exportar los datos de la tabla Alumnos en un archivo de formato
+     * Método para exportar los datos de la tabla Departamentos en un archivo de formato
      * json.
      * 
      * @param con
@@ -158,6 +159,46 @@ public class DepartamentosDAO implements Dao<Departamentos> {
             errores.muestraErrorIO(e);
         }
 
+    }
+
+    public List<Departamentos> getByName(Connection con, String string) {
+        List <Departamentos> lista = new ArrayList<>();
+        try {
+            PreparedStatement s = con.prepareStatement("select * from departamentos where nombre like ?");
+            s.setString(1, string);
+            ResultSet rs = s.executeQuery();
+            while(rs.next()) {
+                Departamentos de = new Departamentos();
+                de.setId(rs.getInt(1));
+                de.setNombre(rs.getString(2));
+                de.setPresupuesto(rs.getFloat(3));
+                de.setDesc(rs.getString(4));
+                lista.add(de);
+            }
+        } catch (SQLException e) {
+            errores.muestraErrorSQL(e);
+        }
+        return lista;
+    }
+
+    public List<Departamentos> getByProfesor(Connection con, String string) {
+        List <Departamentos> lista = new ArrayList<>();
+        try {
+            PreparedStatement s = con.prepareStatement("select * from departamentos d inner join profesores p on p.departamentos=d.id where profesor like ?");
+            s.setString(1, string);
+            ResultSet rs = s.executeQuery();
+            while(rs.next()) {
+                Departamentos de = new Departamentos();
+                de.setId(rs.getInt(1));
+                de.setNombre(rs.getString(2));
+                de.setPresupuesto(rs.getFloat(3));
+                de.setDesc(rs.getString(4));
+                lista.add(de);
+            }
+        } catch (SQLException e) {
+            errores.muestraErrorSQL(e);
+        }
+        return lista;
     }
     
 }

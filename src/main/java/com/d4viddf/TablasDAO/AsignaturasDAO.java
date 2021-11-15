@@ -36,6 +36,7 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
                 Asignaturas as = new Asignaturas();
                 as.setId(rs.getInt(1));
                 as.setNombre(rs.getString(2));
+                as.setCurso(rs.getString(3));
                 lista.add(as);
             }
         } catch (SQLException e) {

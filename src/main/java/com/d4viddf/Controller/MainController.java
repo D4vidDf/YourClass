@@ -7,8 +7,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.Action;
-
 import com.d4viddf.Error.Errores;
 
 import javafx.event.ActionEvent;

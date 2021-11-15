@@ -83,32 +83,36 @@ public class ImpartenController extends DBViewController implements Initializabl
      */
     @FXML
     private void buscar(ActionEvent ae) {
-        if (selectedItem != null) {
-            switch (selectedItem) {
-            case "Número de expediente":
-                findByExpediente();
-                break;
-            case "DNI":
-                findByDNI();
-                break;
-            case "Nombre":
-                findByRowLike(AlumnosDAO.ROW_NOMBRE);
-                break;
-            case "Apellidos":
-                findByRowLike(AlumnosDAO.ROW_APELLIDOS);
-                break;
-            case "Año de nacimiento":
-                findByAnho();
-                break;
-            case "DNI de profesor":
-                findByProfesor();
-                break;
-            case "Todos":
+        if (txtBusqueda.getText().isEmpty()) {
+            errores.mostrar("Por favor,\nIntroduce un valor para realizar la búsqueda");
+        } else {
+            if (selectedItem != null) {
+                switch (selectedItem) {
+                case "Número de expediente":
+                    findByExpediente();
+                    break;
+                case "DNI":
+                    findByDNI();
+                    break;
+                case "Nombre":
+                    findByRowLike(AlumnosDAO.ROW_NOMBRE);
+                    break;
+                case "Apellidos":
+                    findByRowLike(AlumnosDAO.ROW_APELLIDOS);
+                    break;
+                case "Año de nacimiento":
+                    findByAnho();
+                    break;
+                case "DNI de profesor":
+                    findByProfesor();
+                    break;
+                case "Todos":
+                    mostrar();
+                    break;
+                }
+            } else
                 mostrar();
-                break;
-            }
-        } else
-            mostrar();
+        }
     }
 
     /**
