@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.d4viddf.Error.Errores;
 import com.d4viddf.Factory.Dao;
 import com.d4viddf.Tablas.ViewImparten;
-import com.mysql.cj.xdevapi.Statement;
 
 public class ViewImpartenDAO implements Dao<ViewImparten>{
     public static  String ROW_COD_asg = "IDasignatura";
