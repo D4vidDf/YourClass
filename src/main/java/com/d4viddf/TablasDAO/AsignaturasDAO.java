@@ -27,7 +27,7 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
     Errores errores = new Errores();
     public static String ROW_NOMBRE = "nombre";
     public static String ROW_CURSO = "curso";
-    static Scanner teclado = new Scanner (System.in);
+    static Scanner teclado = new Scanner(System.in);
 
     @Override
     public Asignaturas get(Connection con, int id) {
@@ -48,7 +48,7 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
 
     @Override
     public List<Asignaturas> getAll(Connection conn) {
-        List <Asignaturas> lista = null;
+        List<Asignaturas> lista = null;
         try {
             Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = s.executeQuery("SELECT * FROM Asignaturas;");
@@ -57,7 +57,7 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
             totalRows = rs.getRow();
             rs.beforeFirst();
             lista = new ArrayList<Asignaturas>(totalRows);
-            while(rs.next()) {
+            while (rs.next()) {
                 Asignaturas as = new Asignaturas();
                 as.setId(rs.getInt(1));
                 as.setNombre(rs.getString(2));
@@ -70,13 +70,12 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
         return lista;
     }
 
-    public void insertarLote (Connection con, String path) {
+    public void insertarLote(Connection con, String path) {
         JSONParser jsonParser = new JSONParser();
         try {
             FileReader file = new FileReader(path);
             org.json.simple.JSONObject obj = (org.json.simple.JSONObject) jsonParser.parse(file);
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO asignaturas (id,nombre, curso) VALUES (?,?, ?);",
+            PreparedStatement ps = con.prepareStatement("INSERT INTO asignaturas (id,nombre, curso) VALUES (?,?, ?);",
                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             org.json.simple.JSONArray jsonArray = (org.json.simple.JSONArray) obj.get("asignaturas");
 
@@ -94,24 +93,23 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
             ps.executeBatch();
         } catch (DateTimeException e) {
             errores.muestraErrorDate(e);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             errores.muestraErrorSQL(e);
         } catch (IOException e1) {
             errores.muestraErrorIO(e1);
         } catch (ParseException e1) {
             errores.mostrar(e1.getMessage());
         }
-        
+
     }
 
     public List<Asignaturas> getByRowLike(Connection con, String row, String text) {
-        List <Asignaturas> lista = null;
+        List<Asignaturas> lista = null;
         try {
             PreparedStatement s = con.prepareStatement("select * from Asignaturas where " + row + " like upper(?)");
             s.setString(1, "%" + text + "%");
             ResultSet rs = s.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Asignaturas as = new Asignaturas();
                 as.setId(rs.getInt(1));
                 as.setNombre(rs.getString(2));
@@ -126,8 +124,7 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
 
     public void insertar(Connection con, int parseInt, String string, String string2) {
         try {
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO asignaturas (id,nombre, curso) VALUES (?,?, ?);");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO asignaturas (id,nombre, curso) VALUES (?,?, ?);");
             ps.setInt(1, parseInt);
             ps.setString(2, string);
             ps.setString(3, string2);
@@ -161,5 +158,4 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
 
     }
 
-    
 }

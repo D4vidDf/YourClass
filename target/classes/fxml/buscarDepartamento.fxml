@@ -53,21 +53,21 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="554.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <Button layoutX="546.0" layoutY="13.0" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Buscar" textFill="WHITE">
+                        <Button layoutX="546.0" layoutY="13.0" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 5;" text="Buscar" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <TableView fx:id="tabDepartamentos" layoutX="14.0" layoutY="47.0" prefHeight="334.0" prefWidth="612.0" style="-fx-background-color: #ffffff;">
+                        <TableView fx:id="tabDepartamentos" layoutX="14.0" layoutY="47.0" prefHeight="334.0" prefWidth="612.0" style="-fx-background-color: #ffffff;" stylesheets="@../styles/tableview.css">
                           <columns>
-                            <TableColumn fx:id="colNum" prefWidth="108.0" style="-fx-background-color: #ffffff; -fx-border-color: #3A2D32; -fx-border-radius: 5;" text="ID" />
-                              <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="133.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #3A2D32;" text="Nombre" />
-                              <TableColumn fx:id="colPresupuesto" minWidth="0.0" prefWidth="120.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #3A2D32;" text="Presupuesto" />
-                              <TableColumn fx:id="colDesc" prefWidth="248.0" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: #3A2D32;" text="Descripción" />
+                            <TableColumn fx:id="colNum" prefWidth="108.0" style="-fx-font-family: Arial Bold;" text="ID" />
+                              <TableColumn fx:id="colNombre" minWidth="0.0" prefWidth="133.0" style="-fx-font-family: Arial Bold;" text="Nombre" />
+                              <TableColumn fx:id="colPresupuesto" minWidth="0.0" prefWidth="120.0" style="-fx-font-family: Arial Bold;" text="Presupuesto" />
+                              <TableColumn fx:id="colDesc" prefWidth="248.0" style="-fx-font-family: Arial Bold;" text="Descripción" />
                           </columns>
                         </TableView>
-                        <ComboBox id="cbxBuscarPor" fx:id="cbxBuscarPor" layoutX="14.0" layoutY="13.0" prefWidth="150.0" promptText="Buscar por" style="-fx-background-radius: 10; -fx-border-color: #3A2D32 #3A2D32 #3A2D32 #3A2D32; -fx-border-radius: 10; -fx-background-color: #ffffff;" />
-                        <TextField fx:id="txtBusqueda" layoutX="173.0" layoutY="13.0" prefHeight="25.0" prefWidth="360.0" promptText="Búsqueda" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #ffffff;" />
+                        <ComboBox id="cbxBuscarPor" fx:id="cbxBuscarPor" layoutX="14.0" layoutY="13.0" prefWidth="150.0" promptText="Buscar por" style="-fx-background-radius: 5; -fx-border-color: #3A2D32 #3A2D32 #3A2D32 #3A2D32; -fx-border-radius: 5; -fx-background-color: #ffffff; -fx-font-family: Arial Bold;" />
+                        <TextField fx:id="txtBusqueda" layoutX="173.0" layoutY="13.0" prefHeight="25.0" prefWidth="360.0" promptText="Búsqueda" style="-fx-border-radius: 15; -fx-border-color: #000000; -fx-background-color: #ffffff;" />
                      </children>
                   </AnchorPane>
             </content>
