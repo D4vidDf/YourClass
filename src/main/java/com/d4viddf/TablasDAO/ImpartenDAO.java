@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.d4viddf.Error.Errores;
 import com.d4viddf.Factory.Dao;
 import com.d4viddf.Tablas.Imparten;
 
 public class ImpartenDAO implements Dao<Imparten> {
+Errores errores = new Errores();
     static Scanner teclado = new Scanner(System.in);
 
     @Override
@@ -30,9 +32,9 @@ public class ImpartenDAO implements Dao<Imparten> {
             lista = new ArrayList<Imparten>(totalRows);
             while (rs.next()) {
                 Imparten as = new Imparten();
-                as.setAlumno(rs.getString(2));
+                as.setAlumno(rs.getInt(2));
                 as.setAsignatura(rs.getInt(4));
-                as.setCurso(rs.getInt(1));
+                as.setCurso(rs.getString(1));
                 as.setProfesor(rs.getInt(3));
                 lista.add(as);
             }
@@ -65,5 +67,19 @@ public class ImpartenDAO implements Dao<Imparten> {
             e.printStackTrace();
         }
 
+    }
+
+    public void insertar(Connection con, String string, int string2, int parseInt, int parseInt2) {
+        try {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO imparten (curso,alumno, profesor, asignatura) VALUES (?,?, ?, ?);");
+            ps.setString(1, string);
+            ps.setInt(2, string2);
+            ps.setInt(3, parseInt);
+            ps.setInt(4, parseInt2);
+            ps.execute();
+        } catch (SQLException e) {
+            errores.muestraErrorSQL(e);
+        }
     }
 }

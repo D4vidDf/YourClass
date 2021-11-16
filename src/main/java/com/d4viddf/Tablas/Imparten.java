@@ -1,24 +1,24 @@
 package com.d4viddf.Tablas;
 
 public class Imparten {
-    public int curso, profesor, asignatura;
-    public String alumno;
+    public int profesor, asignatura, alumno;
+    public String curso;
 
     public Imparten() {
     }
 
-    public Imparten(int curso, int profesor, int asignatura, String alumno) {
+    public Imparten(String curso, int profesor, int asignatura, int alumno) {
         this.curso = curso;
         this.profesor = profesor;
         this.asignatura = asignatura;
         this.alumno = alumno;
     }
 
-    public int getCurso() {
+    public String getCurso() {
         return this.curso;
     }
 
-    public void setCurso(int curso) {
+    public void setCurso(String curso) {
         this.curso = curso;
     }
 
@@ -38,11 +38,11 @@ public class Imparten {
         this.asignatura = asignatura;
     }
 
-    public String getAlumno() {
+    public int getAlumno() {
         return this.alumno;
     }
 
-    public void setAlumno(String alumno) {
+    public void setAlumno(int alumno) {
         this.alumno = alumno;
     }
 
