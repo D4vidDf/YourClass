@@ -8,6 +8,7 @@ import com.d4viddf.TablasDAO.AsignaturasDAO;
 import com.d4viddf.TablasDAO.DepartamentosDAO;
 import com.d4viddf.TablasDAO.ImpartenDAO;
 import com.d4viddf.TablasDAO.ProfesoresDAO;
+import com.d4viddf.TablasDAO.ViewImpartenDAO;
 
 public abstract class DAOFactory {
     public static final int MYSQL = 1;
@@ -17,6 +18,7 @@ public abstract class DAOFactory {
     public abstract DepartamentosDAO getDepartamentosDAO();
     public abstract ProfesoresDAO getProfesoresDAO();
     public abstract ImpartenDAO getImpartenDAO();
+    public abstract ViewImpartenDAO getViewImpartenDAO();
 
     public static DAOFactory getDAOFactory(int whichFactory) {
 

@@ -45,29 +45,38 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="420.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="420.0" prefWidth="1139.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-      <TabPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="435.0" prefWidth="640.0" style="-fx-background-color: #ffffff; -fx-region-background: #ffffff;" stylesheets="@../styles/tabpane.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="884.0" style="-fx-background-color: #ffffff; -fx-region-background: #ffffff;" stylesheets="@../styles/tabpane.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Buscar  Imparten">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="554.0" prefWidth="640.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <Button layoutX="546.0" layoutY="13.0" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 5;" text="Buscar" textFill="WHITE">
+                        <Button layoutX="1045.0" layoutY="14.0" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 5;" text="Buscar" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <TableView fx:id="tabAlumnos" layoutX="14.0" layoutY="47.0" prefHeight="334.0" prefWidth="612.0" style="-fx-background-color: #ffffff;" stylesheets="@../styles/tableview.css">
+                        <TableView fx:id="tabAlumnos" layoutX="14.0" layoutY="47.0" prefHeight="334.0" prefWidth="1117.0" style="-fx-background-color: #ffffff;" stylesheets="@../styles/tableview.css">
                           <columns>
-                            <TableColumn fx:id="colCurso" prefWidth="135.0" style="-fx-font-family: Arial Bold;" text="Curso" />
-                              <TableColumn fx:id="colAlumno" minWidth="0.0" prefWidth="149.0" style="-fx-font-family: Arial Bold;" text="Alumno" />
-                              <TableColumn fx:id="colProfesor" minWidth="0.0" prefWidth="144.0" style="-fx-font-family: Arial Bold;" text="Profesor" />
-                              <TableColumn fx:id="colAsignatura" prefWidth="182.0" style="-fx-font-family: Arial Bold;" text="Asignatura" />
+                            <TableColumn fx:id="colCurso" prefWidth="64.0" style="-fx-font-family: Arial Bold;" text="Año" />
+                              <TableColumn fx:id="colidAlumno" minWidth="0.0" prefWidth="89.0" style="-fx-font-family: Arial Bold;" text="Expediente" />
+                              <TableColumn fx:id="colNombreAlumno" minWidth="0.0" prefWidth="86.0" style="-fx-font-family: Arial Bold;" text="Nombre Alumno" />
+                              <TableColumn fx:id="colApellidosAlumno" minWidth="0.0" prefWidth="104.0" style="-fx-font-family: Arial Bold;" text="Apellidos Alumno" />
+                              <TableColumn fx:id="colDNIAlumno" prefWidth="70.0" style="-fx-font-family: Arial Bold;" text="DNI Alumno" />
+                              <TableColumn fx:id="colidProfesor" prefWidth="76.0" style="-fx-font-family: Arial Bold;" text="Cod Profesor" />
+                              <TableColumn fx:id="colNombreProfesor" prefWidth="96.0" style="-fx-font-family: Arial Bold;" text="Nombre Profesor" />
+                              <TableColumn fx:id="colApellidosProfesor" prefWidth="99.0" style="-fx-font-family: Arial Bold;" text="Apellidos Profesor" />
+                              <TableColumn fx:id="colDNIProfesor" prefWidth="68.0" style="-fx-font-family: Arial Bold;" text="DNI Profesor" />
+                              <TableColumn fx:id="colNombredepar" prefWidth="64.0" style="-fx-font-family: Arial Bold;" text="Departamento" />
+                              <TableColumn fx:id="colNombreAsignatura" prefWidth="97.0" style="-fx-font-family: Arial Bold;" text="Asignatura" />
+                              <TableColumn fx:id="colidAsignatura" prefWidth="102.0" style="-fx-font-family: Arial Bold;" text="ID Asignatura" />
+                              <TableColumn fx:id="colCursoAsignatura" prefWidth="100.0" style="-fx-font-family: Arial Bold;" text="Curso" />
                           </columns>
                         </TableView>
                         <ComboBox id="cbxBuscarPor" fx:id="cbxBuscarPor" layoutX="14.0" layoutY="13.0" prefWidth="150.0" promptText="Buscar por" style="-fx-background-radius: 5; -fx-border-color: #3A2D32 #3A2D32 #3A2D32 #3A2D32; -fx-border-radius: 5; -fx-background-color: #ffffff; -fx-font-family: Arial Bold;" />
-                        <TextField fx:id="txtBusqueda" layoutX="173.0" layoutY="13.0" prefHeight="25.0" prefWidth="360.0" promptText="Búsqueda" style="-fx-border-radius: 15; -fx-border-color: #000000; -fx-background-color: #ffffff;" />
+                        <TextField fx:id="txtBusqueda" layoutX="173.0" layoutY="13.0" prefHeight="28.0" prefWidth="859.0" promptText="Búsqueda" style="-fx-border-radius: 15; -fx-border-color: #000000; -fx-background-color: #ffffff;" />
                      </children>
                   </AnchorPane>
             </content>
@@ -76,35 +85,35 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <TextField fx:id="txtCurso" layoutX="342.0" layoutY="79.0" prefHeight="36.0" prefWidth="235.0" promptText="Curso 2020/2021" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
-                        <Button layoutX="459.0" layoutY="321.0" mnemonicParsing="false" onAction="#crear" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Crear" textFill="WHITE">
+                        <TextField fx:id="txtCurso" layoutX="668.0" layoutY="72.0" prefHeight="36.0" prefWidth="235.0" promptText="Curso 2020/2021" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
+                        <Button layoutX="785.0" layoutY="314.0" mnemonicParsing="false" onAction="#crear" prefHeight="33.0" prefWidth="106.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Crear" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Label layoutX="63.0" layoutY="89.0" text="Curso:">
+                        <Label layoutX="389.0" layoutY="82.0" text="Curso:">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="63.0" layoutY="138.0" text="Nº de expediente del Alumno:">
+                        <Label layoutX="389.0" layoutY="131.0" text="Nº de expediente del Alumno:">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="63.0" layoutY="191.0" text="Profesor:">
+                        <Label layoutX="389.0" layoutY="184.0" text="Profesor:">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="63.0" layoutY="239.0" text="Asignatura:">
+                        <Label layoutX="389.0" layoutY="232.0" text="Asignatura:">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtExp" layoutX="342.0" layoutY="131.0" prefHeight="36.0" prefWidth="235.0" promptText="Nº del expediente" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
-                        <TextField fx:id="txtProfesor" layoutX="342.0" layoutY="184.0" prefHeight="36.0" prefWidth="235.0" promptText="Código del profesor" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
-                        <TextField fx:id="txtAsig" layoutX="342.0" layoutY="232.0" prefHeight="36.0" prefWidth="235.0" promptText="Código de la asignatura" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
+                        <TextField fx:id="txtExp" layoutX="668.0" layoutY="124.0" prefHeight="36.0" prefWidth="235.0" promptText="Nº del expediente" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
+                        <TextField fx:id="txtProfesor" layoutX="668.0" layoutY="177.0" prefHeight="36.0" prefWidth="235.0" promptText="Código del profesor" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
+                        <TextField fx:id="txtAsig" layoutX="668.0" layoutY="225.0" prefHeight="36.0" prefWidth="235.0" promptText="Código de la asignatura" style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
                      </children>
                   </AnchorPane>
             </content>
@@ -113,28 +122,28 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                      <children>
-                        <Button layoutX="286.0" layoutY="208.0" mnemonicParsing="false" onAction="#exportar" prefHeight="33.0" prefWidth="124.0" style="-fx-background-color: #4B3869; -fx-background-radius: 10;" text="Exportar" textFill="WHITE">
+                        <Button layoutX="556.0" layoutY="187.0" mnemonicParsing="false" onAction="#exportar" prefHeight="33.0" prefWidth="124.0" style="-fx-background-color: #4B3869; -fx-background-radius: 10;" text="Exportar" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="431.0" layoutY="208.0" mnemonicParsing="false" onAction="#importar" prefHeight="33.0" prefWidth="124.0" style="-fx-background-color: #4B3869 #4B3869; -fx-background-radius: 10;" text="Importar" textFill="WHITE">
+                        <Button layoutX="701.0" layoutY="187.0" mnemonicParsing="false" onAction="#importar" prefHeight="33.0" prefWidth="124.0" style="-fx-background-color: #4B3869 #4B3869; -fx-background-radius: 10;" text="Importar" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="path" layoutX="75.0" layoutY="147.0" prefHeight="36.0" prefWidth="335.0" promptText="Ruta del archivo..." style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
-                        <Button layoutX="434.0" layoutY="149.0" mnemonicParsing="false" onAction="#abrir" prefHeight="33.0" prefWidth="117.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Abrir" textFill="WHITE">
+                        <TextField fx:id="path" layoutX="345.0" layoutY="126.0" prefHeight="36.0" prefWidth="335.0" promptText="Ruta del archivo..." style="-fx-border-radius: 10; -fx-background-color: #ffffff; -fx-border-color: #000000;" />
+                        <Button layoutX="704.0" layoutY="128.0" mnemonicParsing="false" onAction="#abrir" prefHeight="33.0" prefWidth="117.0" style="-fx-background-color: #3A2D32 #3A2D32; -fx-background-radius: 10;" text="Abrir" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Label layoutX="75.0" layoutY="105.0" text="Seleccionar archivo:">
+                        <Label layoutX="345.0" layoutY="84.0" text="Seleccionar archivo:">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="estado" editable="false" layoutX="80.0" layoutY="276.0" prefHeight="43.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;">
+                        <TextArea fx:id="estado" editable="false" layoutX="350.0" layoutY="255.0" prefHeight="43.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;">
                            <font>
                               <Font name="Arial Bold" size="18.0" />
                            </font>

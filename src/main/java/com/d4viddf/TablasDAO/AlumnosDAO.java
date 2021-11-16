@@ -35,7 +35,6 @@ public class AlumnosDAO implements Dao<Alumnos> {
     public static String ROW_APELLIDOS = "apellidos";
     private static FileWriter file;
     Errores errores = new Errores();
-    static Scanner teclado = new Scanner(System.in);
 
     /**
      * Método para devolver una Lista con todos los alumnos existentes en la base de

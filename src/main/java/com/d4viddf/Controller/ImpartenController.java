@@ -3,18 +3,16 @@ package com.d4viddf.Controller;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.imageio.stream.ImageOutputStream;
-
 import com.d4viddf.Error.Errores;
-import com.d4viddf.Tablas.Alumnos;
 import com.d4viddf.Tablas.Imparten;
+import com.d4viddf.Tablas.ViewImparten;
 import com.d4viddf.TablasDAO.AlumnosDAO;
 import com.d4viddf.TablasDAO.ImpartenDAO;
+import com.d4viddf.TablasDAO.ViewImpartenDAO;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,7 +20,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -35,15 +32,33 @@ import javafx.stage.Stage;
 public class ImpartenController extends DBViewController implements Initializable {
     Errores errores = new Errores();
     @FXML
-    private TableView<Imparten> tabAlumnos;
+    private TableView<ViewImparten> tabAlumnos;
     @FXML
-    private TableColumn<Imparten, String> colCurso;
+    private TableColumn<ViewImparten, String> colCurso;
     @FXML
-    private TableColumn<Imparten, String> colAlumno;
+    private TableColumn<ViewImparten, Integer> colidAlumno;
     @FXML
-    private TableColumn<Imparten, Integer> colProfesor;
+    private TableColumn<ViewImparten, String> colNombreAlumno;
     @FXML
-    private TableColumn<Imparten, Integer> colAsignatura;
+    private TableColumn<ViewImparten, String> colNombreProfesor;
+    @FXML
+    private TableColumn<ViewImparten, String> colApellidosAlumno;
+    @FXML
+    private TableColumn<ViewImparten, String> colApellidosProfesor;
+    @FXML
+    private TableColumn<ViewImparten, String> colDNIProfesor;
+    @FXML
+    private TableColumn<ViewImparten, String> colDNIAlumno;
+    @FXML
+    private TableColumn<ViewImparten, Integer> colidProfesor;
+    @FXML
+    private TableColumn<ViewImparten, String> colNombredepar;
+    @FXML
+    private TableColumn<ViewImparten, String> colNombreAsignatura;
+    @FXML
+    private TableColumn<ViewImparten, String> colCursoAsignatura;
+    @FXML
+    private TableColumn<ViewImparten, Integer> colidAsignatura;
     @FXML
     private ComboBox<String> cbxBuscarPor;
     @FXML
@@ -60,11 +75,20 @@ public class ImpartenController extends DBViewController implements Initializabl
     @FXML
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        colCurso.setCellValueFactory(new PropertyValueFactory<Imparten, String>("curso"));
-        colAlumno.setCellValueFactory(new PropertyValueFactory<Imparten, String>("alumno"));
-        colProfesor.setCellValueFactory(new PropertyValueFactory<Imparten, Integer>("profesor"));
-        colAsignatura.setCellValueFactory(new PropertyValueFactory<Imparten, Integer>("asignatura"));
+        colCurso.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("CursoImparten"));
+        colidAlumno.setCellValueFactory(new PropertyValueFactory<ViewImparten, Integer>("Expedientealumno"));
+        colNombreAlumno.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Nombrealumno"));
+        colApellidosAlumno.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Apellidosalumno"));
+        colNombreProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("NombreProfesor"));
+        colApellidosProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("AoellidosProfesor"));
+        colDNIAlumno.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("DNIalumno"));
+        colDNIProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("DNIprofesor"));
+        colNombredepar.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Nombredepartamento"));
+        colidAsignatura.setCellValueFactory(new PropertyValueFactory<ViewImparten, Integer>("IDasignatura"));
+        colNombreAsignatura.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Nombreasignatura"));
+        colCursoAsignatura.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Cursoasignatura"));
 
+        
         cbxBuscarPor.getItems().setAll("Curso", "Código Alumno", "DNI Alumno", "Código profesor", "DNI Profesor",
                 "Código Asignatura", "Nombre Asignatura", "Todos");
         cbxBuscarPor.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -92,25 +116,29 @@ public class ImpartenController extends DBViewController implements Initializabl
             if (selectedItem != null) {
                 switch (selectedItem) {
                 case "Curso":
-                    findByExpediente();
+                    findByRowLike(ViewImpartenDAO.ROW_Curso_imparten);
+                    ;
                     break;
                 case "Código alumno":
-                    findByDNI();
+                    findByRowLikeINT(ViewImpartenDAO.ROW_COD_alumno);
+                    ;
                     break;
                 case "DNI alumno":
-                    findByDNI();
+                    findByRowLike(ViewImpartenDAO.ROW_DNI_alumno);
+                    ;
                     break;
                 case "Código Profesor":
-                    findByRowLike(AlumnosDAO.ROW_NOMBRE);
+                    findByRowLikeINT(ViewImpartenDAO.ROW_COD_prof);
                     break;
                 case "DNI Profesor":
-                    findByRowLike(AlumnosDAO.ROW_NOMBRE);
+                    findByRowLike(ViewImpartenDAO.ROW_DNI_profesor);
                     break;
                 case "Código Asignatura":
-                    findByRowLike(AlumnosDAO.ROW_APELLIDOS);
+                    findByRowLikeINT(ViewImpartenDAO.ROW_COD_asg);
                     break;
                 case "Nombre Asignatura":
-                    findByAnho();
+                    findByRowLike(ViewImpartenDAO.ROW_NOMBRE_Aasg);
+                    ;
                     break;
                 case "Todos":
                     mostrar();
@@ -125,40 +153,13 @@ public class ImpartenController extends DBViewController implements Initializabl
      * Método que muestra todos los alumnos existentes en la tabla.
      */
     private void mostrar() {
-        List<Imparten> als = new ArrayList<>();
+        List<ViewImparten> als = new ArrayList<>();
         try {
-            als = mySQLDAOFactory.getImpartenDAO().getAll(mySQLDAOFactory.getConnection());
+            als = mySQLDAOFactory.getViewImpartenDAO().getAll(mySQLDAOFactory.getConnection());
         } catch (SQLException e) {
             errores.muestraErrorSQL(e);
         }
         tabAlumnos.getItems().setAll(als);
-    }
-
-    /**
-     * Método que muestra al alumno que coincida con el número de expediente del
-     * TextField en la tabla
-     */
-    private void findByExpediente() {
-        /*
-         * int id = Integer.parseInt(txtBusqueda.getText()); List<Alumnos> als = new
-         * ArrayList<>(); try {
-         * als.add(mySQLDAOFactory.getAlumnosDAO().get(mySQLDAOFactory.getConnection(),
-         * id)); } catch (SQLException e) {
-         * errores.mostrar("Por favor,\nAñade el Número de expediente para poder buscar"
-         * ); } tabAlumnos.getItems().setAll(als);
-         */
-    }
-
-    /**
-     * Método que muestra al Alumno que coincida con el DNI del campo TextField
-     */
-    private void findByDNI() {
-        /*
-         * List<Alumnos> als = new ArrayList<>(); try { als =
-         * mySQLDAOFactory.getAlumnosDAO().getByDNI(mySQLDAOFactory.getConnection(),
-         * txtBusqueda.getText()); } catch (SQLException e) { e.printStackTrace(); }
-         * tabAlumnos.getItems().setAll(als);
-         */
     }
 
     /**
@@ -167,37 +168,26 @@ public class ImpartenController extends DBViewController implements Initializabl
      * @param row
      */
     private void findByRowLike(String row) {
-        /*
-         * List<Alumnos> als = new ArrayList<>(); try { als =
-         * mySQLDAOFactory.getAlumnosDAO().getByRowLike(mySQLDAOFactory.getConnection(),
-         * row, txtBusqueda.getText()); } catch (SQLException e) { e.printStackTrace();
-         * } tabAlumnos.getItems().setAll(als);
-         */
-    }
 
-    /**
-     * Mëtodo que muestra a los Alumnos que coincidan con la fecha de nacimiento
-     */
-    private void findByAnho() {
-        /*
-         * List<Alumnos> als = new ArrayList<>(); try { als =
-         * mySQLDAOFactory.getAlumnosDAO().getByYear(mySQLDAOFactory.getConnection(),
-         * txtBusqueda.getText()); } catch (SQLException e) { e.printStackTrace(); }
-         * tabAlumnos.getItems().setAll(als);
-         */
+        List<ViewImparten> als = new ArrayList<>();
+        try {
+            als = mySQLDAOFactory.getViewImpartenDAO().getByRowLike(mySQLDAOFactory.getConnection(), row,
+                    txtBusqueda.getText());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tabAlumnos.getItems().setAll(als);
     }
+    private void findByRowLikeINT(String row) {
 
-    /**
-     * Método que muestra a los alumnos que tengan como profesor en alguna
-     * asignatura matriculada
-     */
-    private void findByProfesor() {
-        /*
-         * List<Alumnos> als = new ArrayList<>(); try { als =
-         * mySQLDAOFactory.getAlumnosDAO().getByProfesor(mySQLDAOFactory.getConnection()
-         * , txtBusqueda.getText()); } catch (SQLException e) { e.printStackTrace(); }
-         * tabAlumnos.getItems().setAll(als);
-         */
+        List<ViewImparten> als = new ArrayList<>();
+        try {
+            als = mySQLDAOFactory.getViewImpartenDAO().getByRowLikeINT(mySQLDAOFactory.getConnection(), row,
+                    txtBusqueda.getText());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tabAlumnos.getItems().setAll(als);
     }
 
     /**
@@ -242,14 +232,14 @@ public class ImpartenController extends DBViewController implements Initializabl
         if (path.getText().isEmpty()) {
             guardar();
             try {
-                mySQLDAOFactory.getAlumnosDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
+                mySQLDAOFactory.getImpartenDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
                 estado.setText("Se ha exportado correctamente.");
             } catch (SQLException e) {
                 errores.muestraErrorSQL(e);
             }
         } else {
             try {
-                mySQLDAOFactory.getAlumnosDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
+                mySQLDAOFactory.getImpartenDAO().exportar(mySQLDAOFactory.getConnection(), path.getText().toString());
                 estado.setText("Se ha exportado correctamente.");
             } catch (SQLException e) {
                 errores.muestraErrorSQL(e);
@@ -282,7 +272,7 @@ public class ImpartenController extends DBViewController implements Initializabl
         if (path.getText().isEmpty()) {
             abrir(ae);
             try {
-                mySQLDAOFactory.getAlumnosDAO().insertarLote(mySQLDAOFactory.getConnection(),
+                mySQLDAOFactory.getImpartenDAO().insertarLote(mySQLDAOFactory.getConnection(),
                         path.getText().toString());
                 estado.setText("Se han importado correctamente los datos.");
             } catch (SQLException se) {
@@ -292,7 +282,7 @@ public class ImpartenController extends DBViewController implements Initializabl
             }
         } else {
             try {
-                mySQLDAOFactory.getAlumnosDAO().insertarLote(mySQLDAOFactory.getConnection(),
+                mySQLDAOFactory.getImpartenDAO().insertarLote(mySQLDAOFactory.getConnection(),
                         path.getText().toString());
                 estado.setText("Se han importado correctamente los datos.");
             } catch (SQLException se) {

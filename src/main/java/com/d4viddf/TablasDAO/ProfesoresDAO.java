@@ -1,5 +1,8 @@
 package com.d4viddf.TablasDAO;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -12,16 +15,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.d4viddf.Error.Errores;
 import com.d4viddf.Factory.Dao;
 import com.d4viddf.Tablas.Profesores;
 import com.mysql.cj.exceptions.DataReadException;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 public class ProfesoresDAO implements Dao<Profesores> {
-    static Scanner teclado = new Scanner(System.in);
+    public static String ROW_NOMBRE = "nombre";
+    public static String ROW_APELLIDOS = "apellidos";
+    public static String ROW_DEPARTAMENTO = "departamentos";
+    private static FileWriter file;
+    Errores errores = new Errores();
 
     @Override
     public Profesores get(Connection con, int id) {
-        return null;
+        Profesores al = new Profesores();
+        try {
+            PreparedStatement s = con.prepareStatement("select * from profesores where cod_prof = ?");
+            s.setInt(1, id);
+            ResultSet rs = s.executeQuery();
+            rs.next();
+            al.setCod_prof(rs.getInt(1));
+            al.setDNI(rs.getString(2));
+            al.setNombre(rs.getString(3));
+            al.setApellidos(rs.getString(4));
+            al.setFecha_nacimiento(LocalDate.parse(rs.getString(5)));
+            al.setDepartamento(rs.getInt(6));
+        } catch (SQLException e) {
+            errores.muestraErrorSQL(e);
+        }
+        return al;
     }
 
     @Override
@@ -51,34 +78,139 @@ public class ProfesoresDAO implements Dao<Profesores> {
         return lista;
     }
 
-    public void insertarLote(Connection con) {
+    public List<Profesores> getByRowLike(Connection conn, String row, String query) {
+        List<Profesores> lista = new ArrayList<>();
         try {
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO profesores (dni, nombre, apellidos, fecha_nacimiento, departamento, cod_prof) VALUES (?, ?,?,?,?,?);",
-                    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            System.out.println("¿Cuántos profesores desea añadir?");
-            int cant = Integer.parseInt(teclado.nextLine());
-            for (int i = 0; i < cant; i++) {
-                System.out.println("Inserte el DNI: ");
-                ps.setString(1, teclado.nextLine());
-                System.out.println("Inserte nombre: ");
-                ps.setString(2, teclado.nextLine());
-                System.out.println("Inserte Apellido: ");
-                ps.setString(3, teclado.nextLine());
-                System.out.println("Inserte fecha con el formato dd/mm/aaaa: ");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate date = LocalDate.parse(teclado.nextLine(), formatter);
-                ps.setDate(4, Date.valueOf(date));
-                System.out.println("Inserte cod. departamento: ");
-                ps.setInt(5, Integer.parseInt(teclado.nextLine()));
-                System.out.println("Inserte cod. profesor: ");
-                ps.setInt(6, Integer.parseInt(teclado.nextLine()));
-                ps.addBatch();
+            PreparedStatement s = conn.prepareStatement("select * from alumnos where " + row + " like upper(?)");
+            s.setString(1, "%" + query + "%");
+            ResultSet rs = s.executeQuery();
+            while (rs.next()) {
+                Profesores al = new Profesores();
+                al.setCod_prof(rs.getInt(1));
+                al.setDNI(rs.getString(2));
+                al.setNombre(rs.getString(3));
+                al.setApellidos(rs.getString(4));
+                al.setFecha_nacimiento(LocalDate.parse(rs.getString(5)));
+                al.setDepartamento(rs.getInt(6));
+                lista.add(al);
             }
+        } catch (SQLException e) {
+            errores.muestraErrorSQL(e);
+        }
+        return lista;
+    }
+
+    public List<Profesores> getByYear(Connection conn, String query) {
+        List<Profesores> lista = new ArrayList<>();
+        try {
+            PreparedStatement s = conn.prepareStatement("select * from profesores where fecha_nacimiento regexp ?");
+            s.setString(1, query + "-[0-9][0-9]-[0-9][0-9]");
+            ResultSet rs = s.executeQuery();
+            while (rs.next()) {
+                Profesores al = new Profesores();
+                al.setCod_prof(rs.getInt(1));
+                al.setDNI(rs.getString(2));
+                al.setNombre(rs.getString(3));
+                al.setApellidos(rs.getString(4));
+                al.setFecha_nacimiento(LocalDate.parse(rs.getString(5)));
+                al.setDepartamento(rs.getInt(6));
+                lista.add(al);
+            }
+        } catch (SQLException e) {
+            errores.muestraErrorSQL(e);
+        }
+        return lista;
+    }
+
+
+    public void insertarLote(Connection con, String path) {
+        JSONParser jsonParser = new JSONParser();
+        try {
+            FileReader file = new FileReader(path);
+            org.json.simple.JSONObject obj = (org.json.simple.JSONObject) jsonParser.parse(file);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO profesores (cod_prof,dni, nombre, apelidos, fecha_nacimiento,departamentos) VALUES (?, ?, ?,?,?,?);" , ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            org.json.simple.JSONArray jsonArray = (org.json.simple.JSONArray) obj.get("profesores");
+
+            jsonArray.forEach(alm -> {
+                org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) ((org.json.simple.JSONObject) alm);
+                try {
+                    ps.setInt(1, Integer.parseInt(jsonObject.get("cod_prof").toString()));
+                    ps.setString(2, jsonObject.get("dni").toString());
+                    ps.setString(3, jsonObject.get("nombre").toString());
+                    ps.setString(4, jsonObject.get("apellidos").toString());
+                    ps.setDate(5, Date.valueOf(jsonObject.get("fecha_nac").toString()));
+                    ps.setInt(6, Integer.parseInt(jsonObject.get("departamentos").toString()));
+                    ps.addBatch();
+                } catch (Exception e) {
+                    errores.muestraError(e);
+                }
+            });
             ps.executeBatch();
         } catch (Exception e) {
-            e.printStackTrace();
+            errores.muestraError(e);
+        }
+    }
+
+
+    public void insertar(Connection con, String string, String string2, String string3, int parseInt,
+            LocalDate value, String string4) {
+                try {
+                    PreparedStatement ps = con.prepareStatement(
+                            "INSERT INTO Profesores (cod_prof,dni, nombre, apellidos, fecha_nacimiento,departamentos) VALUES (?,?, ?, ?, ?,?);");
+                    ps.setInt(1, parseInt);
+                    ps.setString(2, string);
+                    ps.setString(3, string2);
+                    ps.setString(4, string3);
+                    ps.setDate(5, Date.valueOf(value));
+                    ps.setInt(6, Integer.parseInt(string4));
+                    ps.execute();
+                } catch (SQLException e) {
+                    errores.muestraErrorSQL(e);
+                }
+    }
+    public void exportar(Connection con, String path) {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArr = new JSONArray();
+        List<Profesores> list = this.getAll(con);
+        list.forEach(item -> {
+            JSONObject obj = new JSONObject();
+            obj.put("cod_prof", item.getCod_prof());
+            obj.put("dni", item.getDNI());
+            obj.put("nombre", item.getNombre());
+            obj.put("apellidos", item.getApellidos());
+            obj.put("fecha_nac", item.getFecha_nacimiento().toString());
+            obj.put("departamentos", item.getDepartamento());
+            jsonArr.put(obj);
+        });
+        jsonObject.put("profesores", jsonArr);
+
+        try {
+            file = new FileWriter(path);
+            file.write(jsonObject.toString());
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            errores.muestraErrorIO(e);
         }
 
+    }
+
+    public Profesores getByDNI(Connection con, String text) {
+        Profesores al = new Profesores();
+        try {
+            PreparedStatement s = con.prepareStatement("select * from profesores where dni = ?");
+            s.setString(1, text);
+            ResultSet rs = s.executeQuery();
+            rs.next();
+            al.setCod_prof(rs.getInt(1));
+            al.setDNI(rs.getString(2));
+            al.setNombre(rs.getString(3));
+            al.setApellidos(rs.getString(4));
+            al.setFecha_nacimiento(LocalDate.parse(rs.getString(5)));
+            al.setDepartamento(rs.getInt(6));
+        } catch (SQLException e) {
+            errores.muestraErrorSQL(e);
+        }
+        return al;
     }
 }

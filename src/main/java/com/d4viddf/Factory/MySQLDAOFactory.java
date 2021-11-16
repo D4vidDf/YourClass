@@ -12,6 +12,7 @@ import com.d4viddf.TablasDAO.AsignaturasDAO;
 import com.d4viddf.TablasDAO.DepartamentosDAO;
 import com.d4viddf.TablasDAO.ImpartenDAO;
 import com.d4viddf.TablasDAO.ProfesoresDAO;
+import com.d4viddf.TablasDAO.ViewImpartenDAO;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -95,6 +96,11 @@ public class MySQLDAOFactory extends DAOFactory {
     @Override
     public ImpartenDAO getImpartenDAO() {
         return new ImpartenDAO();
+    }
+
+    @Override
+    public ViewImpartenDAO getViewImpartenDAO() {
+        return new ViewImpartenDAO();
     }
 
 }
