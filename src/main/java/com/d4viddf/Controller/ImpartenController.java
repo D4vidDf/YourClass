@@ -80,7 +80,8 @@ public class ImpartenController extends DBViewController implements Initializabl
         colNombreAlumno.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Nombrealumno"));
         colApellidosAlumno.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Apellidosalumno"));
         colNombreProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("NombreProfesor"));
-        colApellidosProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("AoellidosProfesor"));
+        colApellidosProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("ApellidosProfesor"));
+        colidProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, Integer>("CodProf"));
         colDNIAlumno.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("DNIalumno"));
         colDNIProfesor.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("DNIprofesor"));
         colNombredepar.setCellValueFactory(new PropertyValueFactory<ViewImparten, String>("Nombredepartamento"));

@@ -5,16 +5,16 @@
 
   <groupId>com.d4viddf</groupId>
   <artifactId>sql_connection</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 
   <name>sql_connection</name>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://yourclass.d4viddf.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.17</maven.compiler.source>
+    <maven.compiler.target>1.17</maven.compiler.target>
   </properties>
 
   <dependencies>
