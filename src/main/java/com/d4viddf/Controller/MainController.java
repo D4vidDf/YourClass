@@ -1,6 +1,7 @@
 package com.d4viddf.Controller;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,9 +20,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
-Errores errores = new Errores();
+    Errores errores = new Errores();
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        
 
     }
 

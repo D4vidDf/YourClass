@@ -1,6 +1,11 @@
 package com.d4viddf;
 
+import java.io.File;
+import java.io.IOException;
+
+import com.d4viddf.Controller.AbrirAjustesController;
 import com.d4viddf.Controller.MainController;
+import com.d4viddf.Error.Errores;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application{
+    Errores errores = new Errores();
     
     /** 
      * @param args
@@ -36,6 +42,25 @@ public class Main extends Application{
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+        File f = new File("settings.json");
+        if (!f.exists()) {
+            FXMLLoader floader = new FXMLLoader();
+            floader.setLocation(getClass().getResource("/fxml/settings.fxml"));
+            AbrirAjustesController cf = new AbrirAjustesController();
+            floader.setController(cf);
+            Parent froot;
+            try {
+                froot = floader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(froot));
+                stage.setTitle("Ajustes");
+                stage.getIcons().add(new Image("/drawable/blackboard.png"));
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException e) {
+                errores.muestraErrorIO(e);
+            }
+        }
     }
 
 }

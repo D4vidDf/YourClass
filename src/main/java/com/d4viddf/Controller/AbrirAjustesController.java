@@ -40,13 +40,15 @@ Errores errores = new Errores();
         obj.put("user", idUser.getText().toString());
         obj.put("pass", idPass.getText().toString());
         try {
-            file = new FileWriter("src/main/resources/data/settings.json");
+            file = new FileWriter("settings.json");
             file.write(obj.toString());
             file.flush();
             file.close();
         } catch (IOException e) {
             errores.muestraErrorIO(e);
         }
+        Stage stage = (Stage) idBase.getScene().getWindow();
+        stage.close();
     }
 
 }

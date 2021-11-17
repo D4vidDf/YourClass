@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.d4viddf.Connections.BasicConnectionPool;
+import com.d4viddf.Error.Errores;
 import com.d4viddf.TablasDAO.AlumnosDAO;
 import com.d4viddf.TablasDAO.AsignaturasDAO;
 import com.d4viddf.TablasDAO.DepartamentosDAO;
@@ -21,13 +22,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class MySQLDAOFactory extends DAOFactory {
+    Errores errores = new Errores();
     final static String url = "jdbc:mysql:///";
     private String user = "";
     private String password = "";
     private String urlF;
     static BasicConnectionPool bcp;
-
-    InputStream in = getClass().getResourceAsStream("/data/settings.json");
 
     public MySQLDAOFactory() {
         //JSON parser object to parse read file
@@ -35,7 +35,7 @@ public class MySQLDAOFactory extends DAOFactory {
         try 
         {
             //Read JSON file
-            Object obj = jsonParser.parse(new InputStreamReader(in));
+            Object obj = jsonParser.parse(new FileReader("settings.json"));
             JSONObject jsonObject = (JSONObject) obj;
             user = jsonObject.get("user").toString();
             password = jsonObject.get("pass").toString();
@@ -44,7 +44,7 @@ public class MySQLDAOFactory extends DAOFactory {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            errores.muestraErrorIO(e);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public class MySQLDAOFactory extends DAOFactory {
 
             bcp = BasicConnectionPool.create(urlF, user, password);
         } catch (SQLException e) {
-            e.printStackTrace();
+            errores.muestraErrorSQL(e);
         }
     }
 
