@@ -3,6 +3,8 @@ package com.d4viddf.Factory;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -25,13 +27,15 @@ public class MySQLDAOFactory extends DAOFactory {
     private String urlF;
     static BasicConnectionPool bcp;
 
+    InputStream in = getClass().getResourceAsStream("/data/settings.json");
+
     public MySQLDAOFactory() {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
         try 
         {
             //Read JSON file
-            Object obj = jsonParser.parse(new FileReader("src/main/resources/data/settings.json"));
+            Object obj = jsonParser.parse(new InputStreamReader(in));
             JSONObject jsonObject = (JSONObject) obj;
             user = jsonObject.get("user").toString();
             password = jsonObject.get("pass").toString();
