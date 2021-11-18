@@ -65,7 +65,7 @@ public class MainController implements Initializable {
     private void url(ActionEvent ae) {
         if (Desktop.isDesktopSupported()) {
             try {
-                Desktop.getDesktop().browse(new URI("https://github.com/D4vidDf/sql_ejer17/wiki"));
+                Desktop.getDesktop().browse(new URI("https://yourclass.d4viddf.com"));
             } catch (IOException e1) {
                 errores.muestraErrorIO(e1);
             } catch (URISyntaxException e1) {
