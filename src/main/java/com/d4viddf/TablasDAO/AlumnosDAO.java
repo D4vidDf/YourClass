@@ -3,32 +3,24 @@ package com.d4viddf.TablasDAO;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import com.d4viddf.Main;
-import com.d4viddf.Controller.ErrorController;
 import com.d4viddf.Error.Errores;
 import com.d4viddf.Factory.Dao;
 import com.d4viddf.Tablas.Alumnos;
-import com.google.protobuf.compiler.PluginProtos.CodeGeneratorResponse.File;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class AlumnosDAO implements Dao<Alumnos> {
     public static String ROW_NOMBRE = "nombre";
@@ -68,6 +60,11 @@ public class AlumnosDAO implements Dao<Alumnos> {
         return lista;
     }
 
+    /**
+     * Mñetodo que devuelve el alumno que coincida con el número de expediente
+     * 
+     * @param id Número de Expediente
+     */
     @Override
     public Alumnos get(Connection con, int id) {
         Alumnos al = new Alumnos();
@@ -87,6 +84,13 @@ public class AlumnosDAO implements Dao<Alumnos> {
         return al;
     }
 
+    /**
+     * Método que devuelve el alumno que coincida con el DNO introducido
+     * 
+     * @param con
+     * @param query DNI
+     * @return List<Alumnos>
+     */
     public List<Alumnos> getByDNI(Connection con, String query) {
         List<Alumnos> lista = new ArrayList<>();
         try {
@@ -108,6 +112,17 @@ public class AlumnosDAO implements Dao<Alumnos> {
         return lista;
     }
 
+    /**
+     * Método que devuelve un ArrayList de Alumnos con todos los campos que
+     * cooincidan con la búsqueda de tipo texto introducida. En caso de ocurrir una
+     * SQLException la clase Errores() mostrará una ventana con la excepción
+     * manejada
+     * 
+     * @param conn
+     * @param row   El nombre de la columna por la cuál se quiere filtrar
+     * @param query Dato del que se quiere tomar como condición
+     * @return List<Alumnos>
+     */
     public List<Alumnos> getByRowLike(Connection conn, String row, String query) {
         List<Alumnos> lista = new ArrayList<>();
         try {
@@ -129,6 +144,14 @@ public class AlumnosDAO implements Dao<Alumnos> {
         return lista;
     }
 
+    /**
+     * Método que devuelve un ArrayList con los Alumnos que coincidan con la fecha
+     * de Nacimiento
+     * 
+     * @param conn
+     * @param query Fecha de Nacimietno
+     * @return List<Alumnos>
+     */
     public List<Alumnos> getByYear(Connection conn, String query) {
         List<Alumnos> lista = new ArrayList<>();
         try {
@@ -150,6 +173,13 @@ public class AlumnosDAO implements Dao<Alumnos> {
         return lista;
     }
 
+    /**
+     * Método que devuelve a los alumnos que tengan a un profesor
+     * 
+     * @param conn
+     * @param query Cod_profesor
+     * @return List<Alumnos>
+     */
     public List<Alumnos> getByProfesor(Connection conn, String query) {
         List<Alumnos> lista = new ArrayList<>();
         try {

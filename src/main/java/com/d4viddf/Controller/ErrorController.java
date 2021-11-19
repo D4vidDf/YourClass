@@ -12,11 +12,22 @@ public class ErrorController implements Initializable {
     @FXML TextArea msg;
     public String error;
 
+    
+    /** 
+     * Inicializa la ventana Errores
+     * @param arg0
+     * @param arg1
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         msg.setText(error);
     }
     
+    
+    /** 
+     * Establece el mensaje de error
+     * @param error
+     */
     public void setError(String error) {
         this.error = error;
     }

@@ -15,6 +15,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Errores {
+    
+    /** 
+     * Método que muestra una ventana con la excepción SQL manejada
+     * @param e
+     */
     public void muestraErrorSQL(SQLException e) {
         String outString = new String("SQL ERROR mensaje: " + e.getMessage() + "\nSQL Estado: " + e.getSQLState()
                 + "\nSQL código específico: " + e.getErrorCode());
@@ -37,6 +42,11 @@ public class Errores {
         }
     }
 
+    
+    /** 
+     * Método que muestra una ventana con la excepción IOException manejada
+     * @param e
+     */
     public void muestraErrorIO(IOException e) {
         e.printStackTrace();
         String outString = new String(
@@ -60,6 +70,11 @@ public class Errores {
         }
     }
 
+    
+    /** 
+     * Método que muestra una ventana con la excepción genérica manejada
+     * @param e
+     */
     public void muestraError(Exception e) {
         e.printStackTrace();
         String outString = new String(
@@ -83,6 +98,11 @@ public class Errores {
         }
     }
 
+    
+    /** 
+     * Método que muestra una ventana con la excepción de tipo URY manejada
+     * @param e
+     */
     public void muestraErrorURY(URISyntaxException e) {
         e.printStackTrace();
         String outString = new String(
@@ -106,6 +126,11 @@ public class Errores {
         }
     }
 
+    
+    /** 
+     * Método que muestra una ventana cuando salta una excepción por una fecha
+     * @param e
+     */
     public void muestraErrorDate(DateTimeException e) {
         e.printStackTrace();
         String outString = new String(
@@ -129,6 +154,11 @@ public class Errores {
         }
     }
 
+    
+    /** 
+     * Método que muestra una ventana con el mensaje que se le pase
+     * @param string Mensaje
+     */
     public void mostrar(String string) {
         FXMLLoader fx = new FXMLLoader();
         fx.setLocation(getClass().getResource("/fxml/error.fxml"));

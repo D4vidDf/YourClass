@@ -25,6 +25,13 @@ public class DepartamentosDAO implements Dao<Departamentos> {
     Errores errores = new Errores();
     static Scanner teclado = new Scanner(System.in);
 
+    
+    /** 
+     * Método que devuelve el departamento que coincide con el ID de Departamentos que se le pasa
+     * @param con
+     * @param id ID de departamento
+     * @return Departamentos
+     */
     @Override
     public Departamentos get(Connection con, int id) {
         Departamentos departamentos = new Departamentos();
@@ -43,6 +50,12 @@ public class DepartamentosDAO implements Dao<Departamentos> {
         return departamentos;
     }
 
+    
+    /** 
+     * Método que devuelve un ArrayList de Departamentos de toda la tabla Departamentos
+     * @param con
+     * @return List<Departamentos>
+     */
     @Override
     public List<Departamentos> getAll(Connection con) {
         List <Departamentos> lista = new ArrayList<>();
@@ -68,6 +81,13 @@ public class DepartamentosDAO implements Dao<Departamentos> {
         return lista;
     }
 
+    
+    /** 
+     * Método que devuelve un ArrayList de los Departamentos que coincidan con el presupuesto introducido
+     * @param con
+     * @param presupuesto Presupuesto
+     * @return List<Departamentos>
+     */
     public List<Departamentos> getByPresupuesto(Connection con, int presupuesto){
         List <Departamentos> lista = new ArrayList<>();
         try {
@@ -88,6 +108,12 @@ public class DepartamentosDAO implements Dao<Departamentos> {
         return lista;
     }
 
+    
+    /** 
+     * Método que añadde por batch en la tabla Departamentos con la información de un fichero JSON que se le pasa
+     * @param con
+     * @param path Ubicación del ficherp
+     */
     public void insertarLote (Connection con,String path) {
         JSONParser jsonParser = new JSONParser();
         try {
@@ -115,6 +141,15 @@ public class DepartamentosDAO implements Dao<Departamentos> {
         
     }
 
+    
+    /** 
+     * Método que permite insertar un único Departamento 
+     * @param con
+     * @param id
+     * @param nombre
+     * @param presupuesto
+     * @param desc
+     */
     public void insertar(Connection con, int id, String nombre, int presupuesto, String desc) {
         try {
             PreparedStatement ps = con.prepareStatement(
@@ -161,6 +196,13 @@ public class DepartamentosDAO implements Dao<Departamentos> {
 
     }
 
+    
+    /** 
+     * Método que devuelve un ArrayList de los Departamentos que coincidan con el nombre a buscar
+     * @param con
+     * @param string Nombre
+     * @return List<Departamentos>
+     */
     public List<Departamentos> getByName(Connection con, String string) {
         List <Departamentos> lista = new ArrayList<>();
         try {
@@ -181,6 +223,13 @@ public class DepartamentosDAO implements Dao<Departamentos> {
         return lista;
     }
 
+    
+    /** 
+     * Método que devuelve los departamentos que tenga un profesor.
+     * @param con
+     * @param string Cod_profesor del que se quiere obtener los departamentos
+     * @return List<Departamentos>
+     */
     public List<Departamentos> getByProfesor(Connection con, String string) {
         List <Departamentos> lista = new ArrayList<>();
         try {

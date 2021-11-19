@@ -29,11 +29,22 @@ Errores errores = new Errores();
     @FXML
     private TextField idBase;
 
+    
+    /** 
+     * Inicializa la ventana de configuración
+     * @param arg0
+     * @param arg1
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
     }
 
+    
+    /** 
+     * Guarda la configuración en un archivo json en la raíz de la ubicación del jar
+     * @param ae
+     */
     @FXML
     private void guardar(ActionEvent ae) {
         JSONObject obj = new JSONObject();

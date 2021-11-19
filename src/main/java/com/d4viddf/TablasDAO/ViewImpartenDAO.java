@@ -12,9 +12,12 @@ import com.d4viddf.Error.Errores;
 import com.d4viddf.Factory.Dao;
 import com.d4viddf.Tablas.ViewImparten;
 
-public class ViewImpartenDAO implements Dao<ViewImparten>{
-    public static  String ROW_COD_asg = "IDasignatura";
-    public static  String ROW_NOMBRE_Aasg = "Nombreasignatura";
+/**
+ * Clase DAO de la vista ViewImparten que implementa la fábrica DAO
+ */
+public class ViewImpartenDAO implements Dao<ViewImparten> {
+    public static String ROW_COD_asg = "IDasignatura";
+    public static String ROW_NOMBRE_Aasg = "Nombreasignatura";
     public static String ROW_NOMBRE_Alumnos = "Nombrealumno";
     public static String ROW_APELLIDOS_alumnos = "Apellidosalumno";
     public static String ROW_NOMBRE_profesor = "NombreProfesor";
@@ -25,17 +28,35 @@ public class ViewImpartenDAO implements Dao<ViewImparten>{
     public static String ROW_COD_prof = "CodProf";
     public static String ROW_Curso_imparten = "CursoImparten";
     Errores errores = new Errores();
+
+    /**
+     * Método que retorna null ya que no es necesario su implementación y es
+     * generado por la fábrica
+     * 
+     * @param con
+     * @param id
+     * @return ViewImparten
+     */
     @Override
     public ViewImparten get(Connection con, int id) {
-        
+
         return null;
     }
 
+    /**
+     * Método que devuelve un ArratList de ViewImparten con toda la información
+     * disponible en la vista ViewImparten En caso de ocurrir una SQLException la
+     * clase Errores() mostrará una ventana con la excepción manejada
+     * 
+     * @param conn
+     * @return List<ViewImparten>
+     */
     @Override
     public List<ViewImparten> getAll(Connection conn) {
         List<ViewImparten> lista = null;
         try {
-            Statement s = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Statement s = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT * FROM ViewImparten;");
             int totalRows = 0;
             rs.last();
@@ -65,6 +86,17 @@ public class ViewImpartenDAO implements Dao<ViewImparten>{
         return lista;
     }
 
+    /**
+     * Método que devuelve un ArrayList de ViewImparten con todos los campos que
+     * cooincidan con la búsqueda de tipo texto introducida. En caso de ocurrir una
+     * SQLException la clase Errores() mostrará una ventana con la excepción
+     * manejada
+     * 
+     * @param conn
+     * @param row   El nombre de la columna por la cuál se quiere filtrar
+     * @param query Dato del que se quiere tomar como condición
+     * @return List<ViewImparten>
+     */
     public List<ViewImparten> getByRowLike(Connection conn, String row, String query) {
         List<ViewImparten> lista = new ArrayList<>();
         try {
@@ -93,6 +125,18 @@ public class ViewImpartenDAO implements Dao<ViewImparten>{
         }
         return lista;
     }
+
+    /**
+     * Método que devuelve un ArrayList de ViewImparten con todos los campos que
+     * cooincidan con la búsqueda de valor numérico introducida. En caso de ocurrir
+     * una SQLException la clase Errores() mostrará una ventana con la excepción
+     * manejada
+     * 
+     * @param conn
+     * @param row   El nombre de la columna por la cuál se quiere filtrar
+     * @param query Dato del que se quiere tomar como condición
+     * @return List<ViewImparten>
+     */
     public List<ViewImparten> getByRowLikeINT(Connection conn, String row, String query) {
         List<ViewImparten> lista = new ArrayList<>();
         try {
@@ -121,5 +165,5 @@ public class ViewImpartenDAO implements Dao<ViewImparten>{
         }
         return lista;
     }
-    
+
 }

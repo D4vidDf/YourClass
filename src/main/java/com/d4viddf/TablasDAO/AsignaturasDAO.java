@@ -29,6 +29,13 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
     public static String ROW_CURSO = "curso";
     static Scanner teclado = new Scanner(System.in);
 
+    /**
+     * Método que devuelve la Asignatura que coincida con el ID introducido
+     * 
+     * @param con
+     * @param id
+     * @return Asignaturas
+     */
     @Override
     public Asignaturas get(Connection con, int id) {
         Asignaturas as = new Asignaturas();
@@ -46,6 +53,13 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
         return as;
     }
 
+    /**
+     * Método que devuelve un ArrayList con todas las asignaturas existentes en la
+     * base de datos
+     * 
+     * @param conn
+     * @return List<Asignaturas>
+     */
     @Override
     public List<Asignaturas> getAll(Connection conn) {
         List<Asignaturas> lista = null;
@@ -70,6 +84,13 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
         return lista;
     }
 
+    /**
+     * Método que inserta por batch los datos de un archivo json con la estructura
+     * de datos de Asignaturas en la base de datos.
+     * 
+     * @param con
+     * @param path Ubicación del fichero .json
+     */
     public void insertarLote(Connection con, String path) {
         JSONParser jsonParser = new JSONParser();
         try {
@@ -103,6 +124,17 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
 
     }
 
+    /**
+     * Método que devuelve un ArrayList de Asignaturas con todos los campos que
+     * cooincidan con la búsqueda de tipo texto introducida. En caso de ocurrir una
+     * SQLException la clase Errores() mostrará una ventana con la excepción
+     * manejada
+     * 
+     * @param conn
+     * @param row  El nombre de la columna por la cuál se quiere filtrar
+     * @param text Dato del que se quiere tomar como condición
+     * @return List<Asignaturas>
+     */
     public List<Asignaturas> getByRowLike(Connection con, String row, String text) {
         List<Asignaturas> lista = null;
         try {
@@ -122,6 +154,13 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
         return lista;
     }
 
+    /**
+     * Método que permite insertar una única asignatura
+     * @param con
+     * @param parseInt ID
+     * @param string Nombre
+     * @param string2 Curso al que pertenecen (Ejemplo: 4º ESO)
+     */
     public void insertar(Connection con, int parseInt, String string, String string2) {
         try {
             PreparedStatement ps = con.prepareStatement("INSERT INTO asignaturas (id,nombre, curso) VALUES (?,?, ?);");
@@ -134,6 +173,13 @@ public class AsignaturasDAO implements Dao<Asignaturas> {
         }
     }
 
+    /**
+     * Método que permite exportar la tabla Asiganturas en un fichero de formato
+     * .json
+     * 
+     * @param con
+     * @param path Ubicación donde se quiere guardar el fichero
+     */
     public void exportar(Connection con, String path) {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArr = new JSONArray();

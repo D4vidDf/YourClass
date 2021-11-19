@@ -7,10 +7,13 @@ import com.d4viddf.Error.Errores;
 import java.sql.*;
 
 public class Borrar {
+    /**
+     * Método que borra todos los datos de la base de datos
+     * @param con
+     */
     public static void borr(Connection con) {
         try {
             Statement st = con.createStatement();
-            // process the ResultSet object
             st.executeUpdate("delete from Departamentos");
             st.executeUpdate("delete from Alumnos");
             st.executeUpdate("delete from Asignaturas");

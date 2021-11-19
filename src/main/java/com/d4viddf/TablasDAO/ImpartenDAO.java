@@ -21,15 +21,28 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class ImpartenDAO implements Dao<Imparten> {
-Errores errores = new Errores();
+    Errores errores = new Errores();
     static Scanner teclado = new Scanner(System.in);
     private static FileWriter file;
 
+    /**
+     * Método que devuelve null ya que no es utilizado
+     * 
+     * @param con
+     * @param id
+     * @return Imparten
+     */
     @Override
     public Imparten get(Connection con, int id) {
         return null;
     }
 
+    /**
+     * Método que devuelve todda la tabla Imparten en un ArrayList
+     * 
+     * @param conn
+     * @return List<Imparten>
+     */
     @Override
     public List<Imparten> getAll(Connection conn) {
         List<Imparten> lista = null;
@@ -55,6 +68,13 @@ Errores errores = new Errores();
         return lista;
     }
 
+    /**
+     * Método que inserta por batch los datos de un archivo json con la estructura
+     * de datos de Imparten en la base de datos.
+     * 
+     * @param con
+     * @param path Ubicación del fichero .json
+     */
     public void insertarLote(Connection con, String path) {
         JSONParser jsonParser = new JSONParser();
         try {
@@ -87,17 +107,27 @@ Errores errores = new Errores();
         } catch (FileNotFoundException e1) {
             errores.mostrar(e1.getMessage());
         } catch (IOException e1) {
-           errores.muestraErrorIO(e1);
+            errores.muestraErrorIO(e1);
         } catch (ParseException e1) {
             errores.mostrar(e1.getMessage());
         }
 
     }
 
+    /**
+     * Método que permite insertar en imparten la relación entre Profesor, Alumno y
+     * asignatura
+     * 
+     * @param con
+     * @param string    Curso
+     * @param string2   Alumno
+     * @param parseInt  Profesor
+     * @param parseInt2 Asignatura
+     */
     public void insertar(Connection con, String string, int string2, int parseInt, int parseInt2) {
         try {
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO imparten (curso,alumno, profesor, asignatura) VALUES (?,?, ?, ?);");
+            PreparedStatement ps = con
+                    .prepareStatement("INSERT INTO imparten (curso,alumno, profesor, asignatura) VALUES (?,?, ?, ?);");
             ps.setString(1, string);
             ps.setInt(2, string2);
             ps.setInt(3, parseInt);
@@ -108,6 +138,12 @@ Errores errores = new Errores();
         }
     }
 
+    /**
+     * Método que permite exportar la tabla imparten en un fichero de formato .json
+     * 
+     * @param con
+     * @param path Ubicación donde se quiere guardar el fichero
+     */
     public void exportar(Connection con, String path) {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArr = new JSONArray();

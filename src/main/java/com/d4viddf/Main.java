@@ -14,18 +14,25 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+/**
+ * Clase que extiende de Aplicación que es la encargada de mostrar la interfaz y
+ * la ventana inicial
+ */
+public class Main extends Application {
     Errores errores = new Errores();
-    
-    /** 
+
+    /**
+     * Método encargado de lanzar la aplicación
+     * 
      * @param args
      */
     public static void main(String[] args) {
         launch(args);
     }
 
-    
-    /** 
+    /**
+     * Método que instancia la vista
+     * 
      * @param primaryStage
      * @throws Exception
      */
@@ -42,6 +49,10 @@ public class Main extends Application{
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+        /**
+         * Si el archivo de configuración no existe abre la ventana de configuración
+         * para poder crearlo
+         */
         File f = new File("settings.json");
         if (!f.exists()) {
             FXMLLoader floader = new FXMLLoader();
