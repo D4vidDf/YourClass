@@ -1,4 +1,3 @@
-# maven
 target/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -25,4 +24,4 @@ buildNumber.properties
 
 # General Java
 *.jar
- .DS_Store
+*.DS_Store
