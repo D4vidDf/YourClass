@@ -199,7 +199,7 @@
         <plugin>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-maven-plugin</artifactId>
-          <version>0.0.3</version>
+          <version>0.0.8</version>
           <configuration>
             <mainClass>com.d4viddf.Main</mainClass>
           </configuration>
