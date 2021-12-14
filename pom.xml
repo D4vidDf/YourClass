@@ -73,7 +73,7 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-media</artifactId>
-      <version>17</version>
+      <version>17.0.1</version>
       <classifier>linux</classifier>
       <scope>compile</scope>
     </dependency>
@@ -102,7 +102,7 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-media</artifactId>
-      <version>17</version>
+      <version>17.0.1</version>
       <classifier>win</classifier>
       <scope>compile</scope>
     </dependency>
@@ -124,7 +124,7 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17</version>
+      <version>17.0.1</version>
       <classifier>mac</classifier>
       <scope>compile</scope>
     </dependency>
