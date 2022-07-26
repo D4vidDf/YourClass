@@ -95,7 +95,7 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17.0.1</version>
+      <version>18.0.2</version>
       <classifier>win</classifier>
       <scope>compile</scope>
     </dependency>
@@ -194,7 +194,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.1.2</version>
+          <version>3.4.0</version>
         </plugin>
         <plugin>
           <groupId>org.openjfx</groupId>
