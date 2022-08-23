@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 /**
  * Clase que extiende de Aplicación que es la encargada de mostrar la interfaz y
  * la ventana inicial
